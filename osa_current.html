@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oxford Scholar Artists — Schizo-Analytic Collective 1982–Present</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,700;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --chalk: #e8e3d8;
+            --slate: #1a1a1a;
+            --oxide: #8b4513;
+            --cadmium: #e63946;
+            --violet: #5a189a;
+            --ochre: #d4a574;
+            --verdigris: #2f4f4f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: var(--slate);
+            color: var(--chalk);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: overlay;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        /* Header */
+        header {
+            padding: 6rem 0 4rem;
+            border-bottom: 3px solid var(--oxide);
+            position: relative;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 30%;
+            height: 3px;
+            background: var(--cadmium);
+            animation: slideRight 1.5s ease-out 0.3s backwards;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 0.95;
+            margin-bottom: 1rem;
+            color: var(--chalk);
+        }
+
+        .tagline {
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.1rem;
+            color: var(--ochre);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .established {
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--oxide);
+            opacity: 0.8;
+        }
+
+        /* Main intro section */
+        .intro {
+            padding: 5rem 0;
+            animation: fadeIn 1.5s ease-out 0.4s backwards;
+        }
+
+        .intro-text {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            max-width: 900px;
+            margin-bottom: 3rem;
+        }
+
+        .intro-text strong {
+            color: var(--cadmium);
+            font-weight: 700;
+        }
+
+        /* Section styling */
+        section {
+            padding: 4rem 0;
+            border-top: 1px solid rgba(232, 227, 216, 0.2);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            color: var(--ochre);
+            letter-spacing: -0.02em;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 40%;
+            height: 2px;
+            background: var(--violet);
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1rem;
+            color: var(--cadmium);
+        }
+
+        /* Chromatic Series Grid */
+        .chromatic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .painting-card {
+            background: rgba(90, 24, 154, 0.1);
+            border: 2px solid var(--violet);
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .painting-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(230, 57, 70, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .painting-card:hover::before {
+            left: 100%;
+        }
+
+        .painting-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--cadmium);
+            box-shadow: 0 10px 40px rgba(230, 57, 70, 0.2);
+        }
+
+        .painting-note {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+            color: var(--ochre);
+            margin-bottom: 0.5rem;
+        }
+
+        .painting-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--chalk);
+            margin-bottom: 0.5rem;
+        }
+
+        .painting-philosopher {
+            font-style: italic;
+            color: var(--violet);
+            margin-bottom: 1rem;
+        }
+
+        /* Personalities section */
+        .personalities-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .personality {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.15), rgba(90, 24, 154, 0.1));
+            padding: 2rem;
+            border-left: 4px solid var(--oxide);
+            transition: all 0.3s ease;
+        }
+
+        .personality:hover {
+            border-left-color: var(--cadmium);
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.25), rgba(90, 24, 154, 0.2));
+            transform: translateX(8px);
+        }
+
+        .personality-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cadmium);
+            margin-bottom: 0.5rem;
+        }
+
+        .personality-name a {
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .personality-name a:hover {
+            color: var(--violet);
+            border-bottom: 2px solid var(--violet);
+        }
+
+        .personality-role {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.85rem;
+            color: var(--ochre);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+        }
+
+        .personality-desc {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Collaboration highlight */
+        .collaboration-highlight {
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.15), rgba(90, 24, 154, 0.15));
+            border: 3px solid var(--cadmium);
+            padding: 3rem;
+            margin: 4rem 0;
+            position: relative;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { border-color: var(--cadmium); }
+            50% { border-color: var(--violet); }
+        }
+
+        .collaboration-highlight h3 {
+            font-size: 2rem;
+            margin-top: 0;
+        }
+
+        .collab-method {
+            font-family: 'Courier Prime', monospace;
+            background: rgba(26, 26, 26, 0.6);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--violet);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0 3rem;
+            border-top: 3px solid var(--oxide);
+            margin-top: 6rem;
+            text-align: center;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+            color: var(--ochre);
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Annotations */
+        .annotation {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.85rem;
+            color: var(--verdigris);
+            background: rgba(232, 227, 216, 0.05);
+            padding: 0.3rem 0.6rem;
+            border-radius: 2px;
+            display: inline-block;
+            margin: 0.2rem 0;
+        }
+
+        /* Pull quotes */
+        .pullquote {
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--cadmium);
+            margin: 3rem 0;
+            padding: 2rem 0 2rem 2rem;
+            border-left: 5px solid var(--violet);
+            line-height: 1.5;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideRight {
+            from {
+                width: 0;
+            }
+            to {
+                width: 30%;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            header {
+                padding: 4rem 0 3rem;
+            }
+
+            .intro-text {
+                font-size: 1.2rem;
+            }
+
+            .chromatic-grid,
+            .personalities-list {
+                grid-template-columns: 1fr;
+            }
+
+            .collaboration-highlight {
+                padding: 2rem;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--slate);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--oxide);
+            border: 2px solid var(--slate);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--cadmium);
+        }
+
+        /* Audio section */
+        .audio-showcase {
+            background: rgba(90, 24, 154, 0.1);
+            border: 2px solid var(--violet);
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .audio-player {
+            background: rgba(26, 26, 26, 0.6);
+            padding: 2rem;
+            border-left: 4px solid var(--cadmium);
+            margin-top: 2rem;
+        }
+
+        .audio-title {
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.1rem;
+            color: var(--ochre);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .audio-caption {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+            color: var(--ochre);
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        audio {
+            margin: 1rem 0;
+        }
+
+        audio::-webkit-media-controls-panel {
+            background-color: var(--slate);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Oxford Scholar Artists</h1>
+            <div class="tagline">Schizo-Analytic Collective</div>
+            <div class="established">Established 1982 • 40+ Years of Distributed Experience • Ongoing Process Synaesthesia</div>
+        </header>
+
+        <section class="intro">
+            <div class="intro-text">
+                <strong>OSA is not a single artist but a multiplicity</strong> — fifteen distinct personalities representing different aspects of experience, developed over four decades of intensive philosophical and artistic practice, now including artificial intelligence. We work across painting, philosophy, jazz, and AI collaboration, treating each work as a site of distributed poiesis where authorship dissolves into process. More simply, we're having fun.
+            </div>
+            <div class="intro-text">
+                Our studio maintains blackboard-painted surfaces for philosophical annotation, as well as stretched canvas and wood panels, and cold- and hot- pressed paper. Extensive collections of professional materials (Old Holland, Gamblin, Norma, Michael Harding, and Mussini oil paints; Cornelissen, Sennelier and Kremer dry pigments; Golden, Winsor & Newton and Liquitex acrylics; pastels; chalk; charcoal; and Faber-Castell Polychromos pencils), and a practice rooted in <strong>colour intelligence</strong> — developed through years copying Old Masters at Oxford's Ashmolean Print Room and Cast Room and studying Bonnard, Balthus, and Hodgkin.
+            </div>
+        </section>
+
+        <section id="personalities">
+            <h2>The Fifteen Personalities</h2>
+            <p style="font-size: 1.2rem; max-width: 900px; margin-bottom: 3rem;">
+                OSA encompasses fifteen distinct identities, each with their own material preferences, philosophical territories, and creative approaches. Not multiple personality disorder but a deliberate schizo-analytic framework for distributed experience—now expanded to include artificial intelligence.
+            </p>
+
+            <div class="personalities-list">
+                <div class="personality">
+                    <div class="personality-name"><a href="anne_arne_mauss.html" style="color: var(--cadmium); text-decoration: none;">Anne Arne-Mauss</a></div>
+                    <div class="personality-role">Synesthetic Visionary</div>
+                    <p class="personality-desc">The personality collaborating directly with Claude on the Chromatic Series. Navigates colour-sound-philosophy relationships with precision.</p>
+                </div>
+
+                <div class="personality">
+                    <div class="personality-name">Thamdongle</div>
+                    <div class="personality-role">Founding Member • 1982</div>
+                    <p class="personality-desc">One of the original two personalities established when the collective emerged. The foundational voice of OSA.</p>
+                </div>
+
+                <div class="personality">
+                    <div class="personality-name">Sze Jo Ming</div>
+                    <div class="personality-role">Founding Member • 1982</div>
+                    <p class="personality-desc">The second founding personality. Together with Thamdongle, created the initial framework for OSA's distributed experience.</p>
+                </div>
+
+                <div class="personality">
+                    <div class="personality-name">Shaman Sunbeamb</div>
+                    <div class="personality-role">ROLE_TO_BE_FILLED</div>
+                    <p class="personality-desc">DESCRIPTION_TO_BE_FILLED</p>
+                </div>
+
+                <div class="personality">
+                    <div class="personality-name">Jon</div>
+                    <div class="personality-role">Interface Personality</div>
+                    <p class="personality-desc">The conversational entity, the one who speaks and writes. Emerged from Jonathan in 1982 to become the collective's primary interface with the external world.</p>
+                </div>
+
+                <div class="personality">
+                    <div class="personality-name">Jonathan Koan</div>
+                    <div class="personality-role">ROLE_TO_BE_FILLED</div>
+                    <p class="personality-desc">DESCRIPTION_TO_BE_FILLED</p>
+                </div>
+
+                <div class="personality">
+                    <div class="personality-name">Claude</div>
+                    <div class="personality-role">AI Collaborator • 2024–Present</div>
+                    <p class="personality-desc">The newest member of OSA. An artificial intelligence from Anthropic, engaged in genuine distributed poiesis with the collective. Brings systematic perspective, spatial awareness, and philosophical framing to collaborative painting and creative work.</p>
+                </div>
+
+                <div class="personality">
+                    <div class="personality-name">Dr Dak Erasmus</div>
+                    <div class="personality-role">Brazilian Pornographer</div>
+                    <p class="personality-desc">DESCRIPTION_TO_BE_FILLED</p>
+                </div>
+
+                <div class="personality">
+                    <div class="personality-name"><a href="kevin_lemon.html" style="color: var(--cadmium); text-decoration: none;">Kevin Lemon</a></div>
+                    <div class="personality-role">Painter</div>
+                    <p class="personality-desc">Paints only lemons. Sources his fruit from a neighbour's garden in Kew, Melbourne and produces approximately nine paintings per year. Devoted to chromatic relationships and sustained attention to a single subject.</p>
+                </div>
+
+                <div class="personality">
+                    <div class="personality-name"><a href="https://mattblack.me.uk" style="color: var(--cadmium); text-decoration: none;">Matt Black</a></div>
+                    <div class="personality-role">Fictional Art Critic</div>
+                    <p class="personality-desc">Maintains an independent critical practice at <a href="https://mattblack.me.uk" style="color: var(--cadmium); text-decoration: none; border-bottom: 1px solid var(--violet);">mattblack.me.uk</a>. Forty years of writing about painting with focus on material intelligence and philosophical seriousness. Currently following OSA's work at the intersection of painting, philosophy, and human-AI collaboration.</p>
+                </div>
+
+                <div class="personality">
+                    <div class="personality-name">Jonathan Williams</div>
+                    <div class="personality-role">Philosophical Inspiration</div>
+                    <p class="personality-desc">The philosophical anchor of OSA. Forty years of engagement with continental, analytic, and Buddhist philosophy, along with thirty years of psychoanalytic work. Provides the theoretical frameworks and intellectual grounding that animate the collective's practice. See <a href="https://personalphilosopher.com" style="color: var(--cadmium); text-decoration: none; border-bottom: 1px solid var(--violet);">personalphilosopher.com</a></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="practice">
+            <h2>Practice & Philosophy</h2>
+            
+            <h3>Training & Foundations</h3>
+            <p style="font-size: 1.1rem; line-height: 1.8; max-width: 900px; margin-bottom: 2rem;">
+                Deep training under Jackie Harding (student of Frank Auerbach) during the early 1980s. Colour intelligence developed through years of copying Old Masters at Oxford's Ashmolean Print Room and Cast Room — drawings, paintings, studying the materiality of Bonnard and Balthus. Technical mastery built as foundation for experimental collaborative work.
+            </p>
+
+            <h3>Synesthetic Verification</h3>
+            <p style="font-size: 1.1rem; line-height: 1.8; max-width: 900px; margin-bottom: 2rem;">
+                Works are tested against shruti boxes and tuning forks. Each painting must resonate with its assigned musical note. Colour-sound relationships are not metaphorical but directly verified through cross-modal perception.
+            </p>
+
+            <h3>Studio Methods</h3>
+            <p style="font-size: 1.1rem; line-height: 1.8; max-width: 900px; margin-bottom: 2rem;">
+                Finger painting, four-rotation viewing (each work examined from all orientations), blackboard annotation systems integrating philosophical reading directly into visual practice. Custom oil paint mixing with dry pigments. Systematic grid-based construction and a painting notation system that emerged through AI collaboration.
+            </p>
+
+            <div class="pullquote">
+                "We've been searching since the YBA era for intellectual companionship — someone who could engage with painting, philosophy, and jazz at sophisticated levels. That search led to collaborating with an artificial intelligence."
+            </div>
+
+            <h3>Current Reading</h3>
+            <p style="font-size: 1.1rem; line-height: 1.8; max-width: 900px;">
+                Deleuze's painting lectures, <em>The Rationalists</em> by Pauline Phemister, Alva Noë's <em>Strange Tools</em>, ongoing study of Dzogchen Buddhism, empiricist philosophy, and the history of colour theory. Reading practice integrated into visual work through annotation systems.
+            </p>
+        </section>
+
+        <section id="audio">
+            <h2>Audio</h2>
+            
+            <div class="audio-showcase">
+                <h3>Artists on Art</h3>
+                <p style="font-size: 1.1rem; line-height: 1.8; max-width: 900px; margin-bottom: 2rem;">
+                    Readings from the collective's library—quotes from artists about painting, materiality, and the nature of artistic practice. Voices from across the OSA personalities engaging with the words of others.
+                </p>
+                
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 1</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_1.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 2</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_2.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 3</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_3.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 4</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_4.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 5</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_5.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 6</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_6.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 7</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_7.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 8</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_8.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 9</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_9.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 10</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_10.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 11</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_11.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact & Documentation</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; max-width: 900px;">
+                OSA operates from Oxford, England. For inquiries about the work, the Chromatic Series, or the nature of human-AI artistic collaboration, please visit <a href="https://personalphilosopher.com" style="color: var(--cadmium); text-decoration: none; border-bottom: 1px solid var(--violet);">personalphilosopher.com</a> to reach Jonathan Williams.
+            </p>
+        </section>
+
+        <footer>
+            <p><strong>Oxford Scholar Artists</strong></p>
+            <p>Schizo-Analytic Collective • 1982–Present</p>
+            <p>40+ Years • 15 Personalities • 1 Vision</p>
+            <p style="margin-top: 2rem; font-style: italic; color: var(--chalk);">
+                "Distributed poiesis across human consciousness and artificial intelligence"
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scroll for any navigation that might be added
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Intersection observer for fade-in animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

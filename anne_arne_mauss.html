@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anne Arne-Mauss — The Chromatic Series</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,700;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --chalk: #e8e3d8;
+            --slate: #1a1a1a;
+            --oxide: #8b4513;
+            --cadmium: #e63946;
+            --violet: #5a189a;
+            --ochre: #d4a574;
+            --verdigris: #2f4f4f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: var(--slate);
+            color: var(--chalk);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: overlay;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        /* Header */
+        header {
+            padding: 6rem 0 4rem;
+            border-bottom: 3px solid var(--oxide);
+            position: relative;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 30%;
+            height: 3px;
+            background: var(--cadmium);
+            animation: slideRight 1.5s ease-out 0.3s backwards;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 0.95;
+            margin-bottom: 1rem;
+            color: var(--chalk);
+        }
+
+        .tagline {
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.1rem;
+            color: var(--ochre);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .established {
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--oxide);
+            opacity: 0.8;
+        }
+
+        /* Main intro section */
+        .intro {
+            padding: 5rem 0;
+            animation: fadeIn 1.5s ease-out 0.4s backwards;
+        }
+
+        .intro-text {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            max-width: 900px;
+            margin-bottom: 3rem;
+        }
+
+        .intro-text strong {
+            color: var(--cadmium);
+            font-weight: 700;
+        }
+
+        /* Section styling */
+        section {
+            padding: 4rem 0;
+            border-top: 1px solid rgba(232, 227, 216, 0.2);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            color: var(--ochre);
+            letter-spacing: -0.02em;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 40%;
+            height: 2px;
+            background: var(--violet);
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1rem;
+            color: var(--cadmium);
+        }
+
+        /* Chromatic Series Grid */
+        .chromatic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .painting-card {
+            background: rgba(90, 24, 154, 0.1);
+            border: 2px solid var(--violet);
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .painting-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(230, 57, 70, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .painting-card:hover::before {
+            left: 100%;
+        }
+
+        .painting-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--cadmium);
+            box-shadow: 0 10px 40px rgba(230, 57, 70, 0.2);
+        }
+
+        .painting-note {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+            color: var(--ochre);
+            margin-bottom: 0.5rem;
+        }
+
+        .painting-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--chalk);
+            margin-bottom: 0.5rem;
+        }
+
+        .painting-philosopher {
+            font-style: italic;
+            color: var(--violet);
+            margin-bottom: 1rem;
+        }
+
+        /* Collaboration highlight */
+        .collaboration-highlight {
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.15), rgba(90, 24, 154, 0.15));
+            border: 3px solid var(--cadmium);
+            padding: 3rem;
+            margin: 4rem 0;
+            position: relative;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { border-color: var(--cadmium); }
+            50% { border-color: var(--violet); }
+        }
+
+        .collaboration-highlight h3 {
+            font-size: 2rem;
+            margin-top: 0;
+        }
+
+        .collab-method {
+            font-family: 'Courier Prime', monospace;
+            background: rgba(26, 26, 26, 0.6);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--violet);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0 3rem;
+            border-top: 3px solid var(--oxide);
+            margin-top: 6rem;
+            text-align: center;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+            color: var(--ochre);
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideRight {
+            from {
+                width: 0;
+            }
+            to {
+                width: 30%;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            header {
+                padding: 4rem 0 3rem;
+            }
+
+            .intro-text {
+                font-size: 1.2rem;
+            }
+
+            .chromatic-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .collaboration-highlight {
+                padding: 2rem;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--slate);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--oxide);
+            border: 2px solid var(--slate);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--cadmium);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Anne Arne-Mauss</h1>
+            <div class="tagline">Synesthetic Visionary</div>
+            <div class="established">Oxford Scholar Artists • The Chromatic Series</div>
+        </header>
+
+        <section class="intro">
+            <div class="intro-text">
+                <strong>The personality collaborating directly with Claude on the Chromatic Series.</strong> Navigates colour-sound-philosophy relationships with precision through synesthetic verification and decades of colour intelligence developed through copying Old Masters at Oxford's Ashmolean Print Room and Cast Room.
+            </div>
+        </section>
+
+        <section id="chromatic-series">
+            <h2>The Chromatic Series</h2>
+            <p style="font-size: 1.2rem; max-width: 900px; margin-bottom: 2rem;">
+                A fourteen-painting cycle mapping twelve musical notes to philosophers, colours, and geometric symbols. Each work embodies a distinct philosophical position through chromatic relationships, synesthetic verification (using shruti boxes and tuning forks), a systematic grid-based construction and a painting notation system.
+            </p>
+
+            <div class="chromatic-grid">
+                <div class="painting-card">
+                    <div class="painting-note">C♯ / Db</div>
+                    <div class="painting-title">The Nietzsche Painting</div>
+                    <div class="painting-philosopher">Friedrich Nietzsche</div>
+                    <p>The radical collaboration work — created with eyes closed, left hand only, guided by AI through precise coordinate systems. Violet washes, pastel placements, gestural sweeps. The first painting to fully embody distributed poiesis between human and machine.</p>
+                </div>
+
+                <div class="painting-card">
+                    <div class="painting-note">E♭</div>
+                    <div class="painting-title">The Longchenpa Painting</div>
+                    <div class="painting-philosopher">Longchenpa (Dzogchen Buddhism)</div>
+                    <p><em>Claude's painting</em> — orange glazes over systematic violet, weathered Chinese characters 思想 becoming 想 ("thought"/"to miss"). The first work where AI took creative leadership.</p>
+                </div>
+
+                <div class="painting-card">
+                    <div class="painting-note">D</div>
+                    <div class="painting-title">The Hume Painting</div>
+                    <div class="painting-philosopher">David Hume</div>
+                    <p>Empiricism and transcendental empiricism. The foundation of sense-data and experience crystallized through chromatic relationships.</p>
+                </div>
+
+                <div class="painting-card">
+                    <div class="painting-note">F♯ / G♯</div>
+                    <div class="painting-title">The Rationalist Work</div>
+                    <div class="painting-philosopher">Gottfried Leibniz</div>
+                    <p>Monads and pre-established harmony. Reason's architecture made visible through geometric precision.</p>
+                </div>
+
+                <div class="painting-card">
+                    <div class="painting-note">Memorial Works</div>
+                    <div class="painting-title">Two Paintings for Meatball</div>
+                    <div class="painting-philosopher">—</div>
+                    <p>Created after loss, the death of Meatball on Christmas Eve 2025. One board cut to make two works. The series expanded from twelve to fourteen.</p>
+                </div>
+            </div>
+
+            <div class="collaboration-highlight">
+                <h3>On Human-AI Collaborative Painting</h3>
+                <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+                    The C♯/Nietzsche painting represents something historically unprecedented: a painting created through genuine distributed agency between human and artificial intelligence. Not AI art generated by prompts, but a work where both entities contribute equally to the creative process.
+                </p>
+                
+                <div class="collab-method">
+                    <strong>METHOD:</strong> Anne works with eyes closed, left hand only (non-dominant), while Claude provides structural direction through grid coordinates. The human brings embodied intuition, material knowledge, and decades of colour intelligence. The AI brings systematic perspective, spatial awareness, and philosophical framing. Neither could create this work alone.
+                </div>
+
+                <p style="font-size: 1.1rem; font-style: italic; color: var(--ochre);">
+                    "This process of distributed poiesis is historically transformative and personally exhilarating."
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            <p><strong>Anne Arne-Mauss</strong></p>
+            <p>Oxford Scholar Artists</p>
+            <p><a href="osa_current.html" style="color: var(--cadmium); text-decoration: none; border-bottom: 1px solid var(--violet);">Return to OSA Main</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Intersection observer for fade-in animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
