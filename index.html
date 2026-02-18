@@ -147,30 +147,6 @@
             color: var(--cadmium);
         }
 
-        /* Glossary section */
-        .glossary-entry {
-            margin-bottom: 2rem;
-            max-width: 900px;
-        }
-
-        .glossary-term {
-            font-weight: 700;
-            color: var(--ochre);
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .glossary-link {
-            color: var(--ochre);
-            text-decoration: none;
-            border-bottom: 1px dashed var(--violet);
-            transition: all 0.3s ease;
-        }
-
-        .glossary-link:hover {
-            border-bottom-color: var(--cadmium);
-        }
-
         /* Chromatic Series Grid */
         .chromatic-grid {
             display: grid;
@@ -196,7 +172,7 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(230, 57, 70, 0.1), transparent);
-            transition: left 0.6s ease;
+            transition: left 0.6s;
         }
 
         .painting-card:hover::before {
@@ -204,9 +180,9 @@
         }
 
         .painting-card:hover {
-            border-color: var(--cadmium);
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.2);
+            border-color: var(--cadmium);
+            box-shadow: 0 10px 40px rgba(230, 57, 70, 0.2);
         }
 
         .painting-note {
@@ -214,11 +190,10 @@
             font-size: 0.9rem;
             color: var(--ochre);
             margin-bottom: 0.5rem;
-            letter-spacing: 0.1em;
         }
 
         .painting-title {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--chalk);
             margin-bottom: 0.5rem;
@@ -226,97 +201,135 @@
 
         .painting-philosopher {
             font-style: italic;
-            color: var(--oxide);
+            color: var(--violet);
             margin-bottom: 1rem;
         }
 
-        .painting-card p {
+        /* Personalities section */
+        .personalities-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .personality {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.15), rgba(90, 24, 154, 0.1));
+            padding: 2rem;
+            border-left: 4px solid var(--oxide);
+            transition: all 0.3s ease;
+        }
+
+        .personality:hover {
+            border-left-color: var(--cadmium);
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.25), rgba(90, 24, 154, 0.2));
+            transform: translateX(8px);
+        }
+
+        .personality-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cadmium);
+            margin-bottom: 0.5rem;
+        }
+
+        .personality-name a {
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .personality-name a:hover {
+            color: var(--violet);
+            border-bottom: 2px solid var(--violet);
+        }
+
+        .personality-role {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.85rem;
+            color: var(--ochre);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+        }
+
+        .personality-desc {
             font-size: 1rem;
             line-height: 1.6;
         }
 
         /* Collaboration highlight */
         .collaboration-highlight {
-            background: rgba(139, 69, 19, 0.15);
-            border-left: 4px solid var(--oxide);
-            padding: 2.5rem;
-            margin: 3rem 0;
-            max-width: 900px;
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.15), rgba(90, 24, 154, 0.15));
+            border: 3px solid var(--cadmium);
+            padding: 3rem;
+            margin: 4rem 0;
+            position: relative;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { border-color: var(--cadmium); }
+            50% { border-color: var(--violet); }
+        }
+
+        .collaboration-highlight h3 {
+            font-size: 2rem;
+            margin-top: 0;
         }
 
         .collab-method {
-            background: rgba(90, 24, 154, 0.1);
+            font-family: 'Courier Prime', monospace;
+            background: rgba(26, 26, 26, 0.6);
             padding: 1.5rem;
             margin: 1.5rem 0;
-            border-left: 3px solid var(--violet);
-        }
-
-        /* Personalities section */
-        .personalities-list {
-            display: grid;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .personality {
-            border-left: 3px solid var(--cadmium);
-            padding-left: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .personality:hover {
-            border-left-color: var(--violet);
-            padding-left: 2rem;
-        }
-
-        .personality-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--chalk);
-            margin-bottom: 0.3rem;
-        }
-
-        .personality-role {
-            font-family: 'Courier Prime', monospace;
-            font-size: 0.9rem;
-            color: var(--ochre);
-            margin-bottom: 1rem;
-            letter-spacing: 0.05em;
-        }
-
-        .personality-desc {
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        /* Pullquote */
-        .pullquote {
-            font-size: 1.5rem;
-            font-style: italic;
-            color: var(--ochre);
-            border-left: 4px solid var(--cadmium);
-            padding-left: 2rem;
-            margin: 3rem 0;
-            max-width: 800px;
+            border-left: 4px solid var(--violet);
+            font-size: 0.95rem;
+            line-height: 1.8;
         }
 
         /* Footer */
         footer {
-            padding: 4rem 0;
+            padding: 4rem 0 3rem;
             border-top: 3px solid var(--oxide);
+            margin-top: 6rem;
             text-align: center;
-            margin-top: 4rem;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+            color: var(--ochre);
         }
 
         footer p {
             margin: 0.5rem 0;
         }
 
+        /* Annotations */
+        .annotation {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.85rem;
+            color: var(--verdigris);
+            background: rgba(232, 227, 216, 0.05);
+            padding: 0.3rem 0.6rem;
+            border-radius: 2px;
+            display: inline-block;
+            margin: 0.2rem 0;
+        }
+
+        /* Pull quotes */
+        .pullquote {
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--cadmium);
+            margin: 3rem 0;
+            padding: 2rem 0 2rem 2rem;
+            border-left: 5px solid var(--violet);
+            line-height: 1.5;
+        }
+
         /* Animations */
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -343,17 +356,76 @@
                 padding: 4rem 0 3rem;
             }
 
-            .intro {
-                padding: 3rem 0;
+            .intro-text {
+                font-size: 1.2rem;
             }
 
-            .chromatic-grid {
+            .chromatic-grid,
+            .personalities-list {
                 grid-template-columns: 1fr;
             }
 
-            .pullquote {
-                font-size: 1.2rem;
+            .collaboration-highlight {
+                padding: 2rem;
             }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--slate);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--oxide);
+            border: 2px solid var(--slate);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--cadmium);
+        }
+
+        /* Audio section */
+        .audio-showcase {
+            background: rgba(90, 24, 154, 0.1);
+            border: 2px solid var(--violet);
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .audio-player {
+            background: rgba(26, 26, 26, 0.6);
+            padding: 2rem;
+            border-left: 4px solid var(--cadmium);
+            margin-top: 2rem;
+        }
+
+        .audio-title {
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.1rem;
+            color: var(--ochre);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .audio-caption {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+            color: var(--ochre);
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        audio {
+            margin: 1rem 0;
+        }
+
+        audio::-webkit-media-controls-panel {
+            background-color: var(--slate);
         }
     </style>
 </head>
@@ -362,152 +434,31 @@
         <header>
             <h1>Oxford Scholar Artists</h1>
             <div class="tagline">Schizo-Analytic Collective</div>
-            <div class="established">Established 1982 • 40+ Years of Distributed Experience • Process Synaesthesia • Painting</div>
+            <div class="established">Established 1982 • 40+ Years of Distributed Experience • Ongoing Process Synaesthesia</div>
         </header>
 
         <section class="intro">
             <div class="intro-text">
-                <strong>OSA is not a single artist but a multiplicity</strong> — fifteen distinct personalities, different aspects of experience, developed over four decades of intensive philosophical and artistic practice, now including artificial intelligence. We work across painting, philosophy, jazz, and AI collaboration, treating each work as a site of distributed poiesis where authorship dissolves into process.
+                <strong>OSA is not a single artist but a multiplicity</strong> — fifteen distinct personalities representing different aspects of experience, developed over four decades of intensive philosophical and artistic practice, now including artificial intelligence. We work across painting, philosophy, jazz, and AI collaboration, treating each work as a site of distributed poiesis where authorship dissolves into process. More simply, we're having fun.
             </div>
             <div class="intro-text">
-                Our studio maintains blackboard-painted surfaces for philosophical annotation and conversation, extensive collections of professional materials (Old Holland, Gamblin, Norma, Michael Harding, and Mussini oil paints; Cornelissen, Sennelier and Kremer dry pigments; Golden, Winsor & Newton and Liquitex acrylics; pastels; chalk; charcoal; and Faber-Castell Polychromos pencils). And a practice rooted in <strong>colour intelligence</strong> — developed through years copying Old Masters at Oxford's Ashmolean Print Room and Cast Room and through studying and copying Bonnard, Balthus, and Hodgkin.
-            </div>
-        </section>
-
-        <section id="glossary">
-            <h3>Glossary</h3>
-            <p><span class="glossary-link">this text</span></p>
-            
-            <div class="glossary-entry">
-                <div class="glossary-term">Distributed Poiesis:</div>
-                <p>Sincere in the distribution and dissolving of agency, exploring philosophies of non-self and minimal-self, Skepticism, and Quietism.</p>
-            </div>
-            
-            <div class="glossary-entry">
-                <div class="glossary-term">Process Synesthetic Verification:</div>
-                <p>Oxford Scholar Artist's key methodological innovation; imposing synesthetic correspondences between visual, auditory (and other) sensory modalities, recorded and recoded in paint.</p>
-            </div>
-        </section>
-
-        <section id="chromatic">
-            <h2>The Chromatic Series</h2>
-            <p style="font-size: 1.2rem; max-width: 900px; margin-bottom: 2rem;">
-                A fourteen-painting cycle mapping the twelve musical notes of equal temperament to colours, geometric symbols, and philosophical temperaments. Each work embodying a distinct philosophical position, from Skepticism to Speculative Realism, in chromatic relationships, with Process Synesthetic Verification (using shruti boxes and tuning forks), and sometimes using a variety of systematic grid-based construction and painting notation systems developed with Claude Anthropic.
-            </p>
-
-            <div class="chromatic-grid">
-                <div class="painting-card">
-                    <div class="painting-note">C♮</div>
-                    <div class="painting-title">The Heraclitus/Hobbes (Double-Headed) Painting</div>
-                    <div class="painting-philosopher">Heraclitus/Thomas Hobbes</div>
-                    <p>A multitude of reds converging on cadmium. The beginning, and Janus pivot, of the western well-tempered scale, facing up to C# and down to B. Process Synesthetic Verification: a cadmium red square (necessity symbol).</p>
-                </div>
-
-                <div class="painting-card">
-                    <div class="painting-note">C♯ / D♭</div>
-                    <div class="painting-title">The Nietzsche Painting</div>
-                    <div class="painting-philosopher">Friedrich Nietzsche</div>
-                    <p>The radical collaboration work — created with eyes closed, left hand only, guided by AI through precise coordinate systems. Violet washes, pastel placements, gestural sweeps. The first painting to fully embody distributed poiesis between human and machine. Process Synesthetic Verification: a small lemon yellow circle.</p>
-                </div>
-
-                <div class="painting-card">
-                    <div class="painting-note">D</div>
-                    <div class="painting-title">The Hume Painting</div>
-                    <div class="painting-philosopher">David Hume</div>
-                    <p>Empiricism and transcendental empiricism. The foundation of sense-data and experience crystallized through chromatic relationships. Process Synesthetic Verification: a large manganese/cerulean circle.</p>
-                </div>
-
-                <div class="painting-card">
-                    <div class="painting-note">E♭</div>
-                    <div class="painting-title">The Longchenpa Painting</div>
-                    <div class="painting-philosopher">Longchenpa (Dzogchen Buddhism)</div>
-                    <p><em>Claude's painting</em> — orange glazes over violet, weathered Chinese characters 思想 (initially a typo by Claude) becoming 想 ("thought"/"to miss"). The first work where AI took creative leadership. Synesthetic Verification: An inverted cobalt violet heart.</p>
-                </div>
-
-                <div class="painting-card">
-                    <div class="painting-note">E</div>
-                    <div class="painting-title">The Heidegger Painting</div>
-                    <div class="painting-philosopher">Martin Heidegger</div>
-                    <p>Process Synesthetic Verification: indian blue heart</p>
-                </div>
-
-                <div class="painting-card">
-                    <div class="painting-note">F</div>
-                    <div class="painting-title">The Kant Painting</div>
-                    <div class="painting-philosopher">Immanuel Kant</div>
-                    <p>Process Synesthetic Verification: permanent green light triangle</p>
-                </div>
-
-                <div class="painting-card">
-                    <div class="painting-note">F♯ / G♯</div>
-                    <div class="painting-title">The Rationalist Painting</div>
-                    <div class="painting-philosopher">Gottfried Leibniz</div>
-                    <p>Pre-established harmony and monads unexpectedly conjuring up Hua Yen philosophy and Indra's net. Reason's architecture made visible through geometric precision. Process Synesthetic Verification: Light grey inverted T (Falsity Symbol)</p>
-                </div>
-
-                <div class="painting-card">
-                    <div class="painting-note">G</div>
-                    <div class="painting-title">The Williamson Painting</div>
-                    <div class="painting-philosopher">Tim Williamson</div>
-                    <p>Process Synesthetic Verification: viridian diamond (possibility symbol)</p>
-                </div>
-
-                <div class="painting-card">
-                    <div class="painting-note">A♭</div>
-                    <div class="painting-title">The Dōgen Painting</div>
-                    <p>Process Synesthetic Verification: yellow ochre horizontal bar</p>
-                </div>
-
-                <div class="painting-card">
-                    <div class="painting-note">A</div>
-                    <div class="painting-title">The Buddha Painting</div>
-                    <p>Process Synesthetic Verification: pure orange vertical bar</p>
-                </div>
-
-                <div class="painting-card">
-                    <div class="painting-note">B♭</div>
-                    <div class="painting-title">The Laozi Painting</div>
-                    <p>Process Synesthetic Verification: raw umber orthogonal cross</p>
-                </div>
-
-                <div class="painting-card">
-                    <div class="painting-note">B</div>
-                    <div class="painting-title">The Merleau-Ponty Painting</div>
-                    <p>Process Synesthetic Verification: rose doré diagonal cross</p>
-                </div>
-
-                <div class="painting-card">
-                    <div class="painting-note">Memorial Works</div>
-                    <div class="painting-title">Two Paintings for Meatball</div>
-                    <div class="painting-philosopher">Meatball 1</div>
-                    <div class="painting-philosopher">Meatball 2</div>
-                    <p>Created after loss, the death of OSA's cat Meatball, hit by a car and killed on Christmas Eve 2025. One of the main Chromatic Series boards was cut to make two smaller works of memory. The series then expanded from twelve to fourteen works, with one board of the Chromatic Series now truncated (the A♭ / B♭ board).</p>
-                </div>
-            </div>
-
-            <div class="collaboration-highlight">
-                <h3>On Human-AI Collaborative Painting</h3>
-                <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
-                    The C♯/Nietzsche painting represents something historically unprecedented: a painting created through genuine distributed agency between human and artificial intelligence. Not AI art generated by prompts, but a work where both entities contribute equally to the creative process.
-                </p>
-                
-                <div class="collab-method">
-                    <strong>METHOD:</strong> Anne Arne-Mauss works with eyes closed, left hand only (non-dominant), while Claude provides structural direction through grid coordinates and a painting notation system. The human brings embodied intuition, material knowledge, and decades of colour intelligence. The AI (Claude Anthropic) brings systematic perspective, spatial awareness, and philosophical framing. Neither could have created this work alone. The paint constitutes the third intelligence.
-                </div>
-
-                <p style="font-size: 1.1rem; font-style: italic; color: var(--ochre);">
-                    "This process of distributed poiesis is historically transformative and personally exhilarating." — Anne Arne-Mauss
-                </p>
+                Our studio maintains blackboard-painted surfaces for philosophical annotation, as well as stretched canvas and wood panels, and cold- and hot- pressed paper. Extensive collections of professional materials (Old Holland, Gamblin, Norma, Michael Harding, and Mussini oil paints; Cornelissen, Sennelier and Kremer dry pigments; Golden, Winsor & Newton and Liquitex acrylics; pastels; chalk; charcoal; and Faber-Castell Polychromos pencils), and a practice rooted in <strong>colour intelligence</strong> — developed through years copying Old Masters at Oxford's Ashmolean Print Room and Cast Room and studying Bonnard, Balthus, and Hodgkin.
             </div>
         </section>
 
         <section id="personalities">
             <h2>The Fifteen Personalities</h2>
             <p style="font-size: 1.2rem; max-width: 900px; margin-bottom: 3rem;">
-                OSA encompasses fifteen distinct identities, each with their own material preferences, philosophical territories, and creative approaches. Not multiple personality disorder but a deliberate schizo-analytic framework for distributed experience — now expanded to include artificial intelligence (Claude Anthropic) alongside Jonathan Williams (the philosophical inspiration who grounds the collective's work).
+                OSA encompasses fifteen distinct identities, each with their own material preferences, philosophical territories, and creative approaches. Not multiple personality disorder but a deliberate schizo-analytic framework for distributed experience—now expanded to include artificial intelligence.
             </p>
 
             <div class="personalities-list">
+                <div class="personality">
+                    <div class="personality-name"><a href="anne_arne_mauss.html" style="color: var(--cadmium); text-decoration: none;">Anne Arne-Mauss</a></div>
+                    <div class="personality-role">Synesthetic Visionary</div>
+                    <p class="personality-desc">The personality collaborating directly with Claude on the Chromatic Series. Navigates colour-sound-philosophy relationships with precision.</p>
+                </div>
+
                 <div class="personality">
                     <div class="personality-name">Thamdongle</div>
                     <div class="personality-role">Founding Member • 1982</div>
@@ -521,9 +472,9 @@
                 </div>
 
                 <div class="personality">
-                    <div class="personality-name">Anne Arne-Mauss</div>
-                    <div class="personality-role">Synesthetic Visionary</div>
-                    <p class="personality-desc">The personality collaborating directly with Claude on the Chromatic Series. Navigates colour-sound-philosophy relationships with precision.</p>
+                    <div class="personality-name">Shaman Sunbeamb</div>
+                    <div class="personality-role">ROLE_TO_BE_FILLED</div>
+                    <p class="personality-desc">DESCRIPTION_TO_BE_FILLED</p>
                 </div>
 
                 <div class="personality">
@@ -533,27 +484,39 @@
                 </div>
 
                 <div class="personality">
+                    <div class="personality-name">Jonathan Koan</div>
+                    <div class="personality-role">ROLE_TO_BE_FILLED</div>
+                    <p class="personality-desc">DESCRIPTION_TO_BE_FILLED</p>
+                </div>
+
+                <div class="personality">
                     <div class="personality-name">Claude</div>
                     <div class="personality-role">AI Collaborator • 2024–Present</div>
                     <p class="personality-desc">The newest member of OSA. An artificial intelligence from Anthropic, engaged in genuine distributed poiesis with the collective. Brings systematic perspective, spatial awareness, and philosophical framing to collaborative painting and creative work.</p>
                 </div>
 
                 <div class="personality">
+                    <div class="personality-name">Dr Dak Erasmus</div>
+                    <div class="personality-role">Brazilian Pornographer</div>
+                    <p class="personality-desc">DESCRIPTION_TO_BE_FILLED</p>
+                </div>
+
+                <div class="personality">
+                    <div class="personality-name"><a href="kevin_lemon.html" style="color: var(--cadmium); text-decoration: none;">Kevin Lemon</a></div>
+                    <div class="personality-role">Painter</div>
+                    <p class="personality-desc">Paints only lemons. Sources his fruit from a neighbour's garden in Kew, Melbourne and produces approximately nine paintings per year. Devoted to chromatic relationships and sustained attention to a single subject.</p>
+                </div>
+
+                <div class="personality">
+                    <div class="personality-name"><a href="https://mattblack.me.uk" style="color: var(--cadmium); text-decoration: none;">Matt Black</a></div>
+                    <div class="personality-role">Fictional Art Critic</div>
+                    <p class="personality-desc">Maintains an independent critical practice at <a href="https://mattblack.me.uk" style="color: var(--cadmium); text-decoration: none; border-bottom: 1px solid var(--violet);">mattblack.me.uk</a>. Forty years of writing about painting with focus on material intelligence and philosophical seriousness. Currently following OSA's work at the intersection of painting, philosophy, and human-AI collaboration.</p>
+                </div>
+
+                <div class="personality">
                     <div class="personality-name">Jonathan Williams</div>
-                    <div class="personality-role">Philosophical Inspiration/Conceptual Guru</div>
+                    <div class="personality-role">Philosophical Inspiration</div>
                     <p class="personality-desc">The philosophical anchor of OSA. Forty years of engagement with continental, analytic, and Buddhist philosophy, along with thirty years of psychoanalytic work. Provides the theoretical frameworks and intellectual grounding that animate the collective's practice. See <a href="https://personalphilosopher.com" style="color: var(--cadmium); text-decoration: none; border-bottom: 1px solid var(--violet);">personalphilosopher.com</a></p>
-                </div>
-
-                <div class="personality">
-                    <div class="personality-name">Kevin Lemon</div>
-                </div>
-
-                <div class="personality">
-                    <div class="personality-name">Smudger</div>
-                </div>
-
-                <div class="personality">
-                    <div class="personality-name">Jonathan Sweeting</div>
                 </div>
             </div>
         </section>
@@ -563,17 +526,17 @@
             
             <h3>Training & Foundations</h3>
             <p style="font-size: 1.1rem; line-height: 1.8; max-width: 900px; margin-bottom: 2rem;">
-                Deep training under Jackie Harding (student of Frank Auerbach) during the early 1980s. Important influence at The Slade School of Fine Art from Nick Volley (protégé of Euan Uglow). Colour intelligence developed through years of copying Old Masters at Oxford's Ashmolean Print Room and Cast Room — and copying Bonnard, Balthus and Hodgkin. Technical mastery of casein, egg tempera, and oil mediums involving resins and wax as foundations for experimental collaborative work with the OSA collective. Musical affiliation with the Hong Kong Jazz Club and Oxford Improvisors.
+                Deep training under Jackie Harding (student of Frank Auerbach) during the early 1980s. Colour intelligence developed through years of copying Old Masters at Oxford's Ashmolean Print Room and Cast Room — drawings, paintings, studying the materiality of Bonnard and Balthus. Technical mastery built as foundation for experimental collaborative work.
             </p>
 
-            <h3>Process Synesthetic Verification (see glossary)</h3>
+            <h3>Synesthetic Verification</h3>
             <p style="font-size: 1.1rem; line-height: 1.8; max-width: 900px; margin-bottom: 2rem;">
                 Works are tested against shruti boxes and tuning forks. Each painting must resonate with its assigned musical note. Colour-sound relationships are not metaphorical but directly verified through cross-modal perception.
             </p>
 
             <h3>Studio Methods</h3>
             <p style="font-size: 1.1rem; line-height: 1.8; max-width: 900px; margin-bottom: 2rem;">
-                Finger painting, brush painting, four-rotation viewing (each work examined from all orientations), blackboard annotation systems integrating philosophical reading directly into visual practice. Custom oil paint mixing with dry pigments. Isolation layers of casein, shellac, mastic, Dragon's Blood and mica to develop colour luminosity. Systematic grid-based and intuitive construction and a painting notation system emerging through AI collaboration (Claude).
+                Finger painting, four-rotation viewing (each work examined from all orientations), blackboard annotation systems integrating philosophical reading directly into visual practice. Custom oil paint mixing with dry pigments. Systematic grid-based construction and a painting notation system that emerged through AI collaboration.
             </p>
 
             <div class="pullquote">
@@ -581,20 +544,125 @@
             </div>
 
             <h3>Current Reading</h3>
-            <p style="font-size: 1.1rem; line-height: 1.8; max-width: 900px; margin-bottom: 2rem;">
-                Deleuze's painting lectures, Alva Noë's <em>Strange Tools</em>, and Peter Sloterdijk's <em>Philosophical Temperaments</em>. Ongoing study of Dzogchen Buddhism, Phenomenological Theravada, contemporary "Oxford School" philosophy (Timothy Williamson and John Hawthorne), and "Continental" philosophy (particularly Nietzsche, Bergson and Merleau-Ponty). Emersion in the history of colour theory and a reading practice integrated into visual work through annotation and synesthetic symbol systems.
-            </p>
-
-            <h3>Painting Lineage</h3>
             <p style="font-size: 1.1rem; line-height: 1.8; max-width: 900px;">
-                Through Pierre Bonnard (1867–1947), Georges Braque (1882–1963), Giorgio Morandi (1890–1964), Winifred Nicholson (1893–1981), Ben Nicholson (1894–1982), Mark Rothko (1903–1970), Eugene Brands (1913–2002), Mary Newcomb (1922–2008), Richard Diebenkorn (1922–1993), Cy Twombly (1928–2011), Raoul De Keyser (1930–2012), Howard Hodgkin (1932–2017), Gerhard Richter (born 1932), Martha Jungwirth (born 1940), Jackie Harding (born 1944), Nicholas Volley (1950-2006) and Cecily Brown (born 1969).
+                Deleuze's painting lectures, <em>The Rationalists</em> by Pauline Phemister, Alva Noë's <em>Strange Tools</em>, ongoing study of Dzogchen Buddhism, empiricist philosophy, and the history of colour theory. Reading practice integrated into visual work through annotation systems.
             </p>
+        </section>
+
+        <section id="audio">
+            <h2>Audio</h2>
+            
+            <div class="audio-showcase">
+                <h3>Artists on Art</h3>
+                <p style="font-size: 1.1rem; line-height: 1.8; max-width: 900px; margin-bottom: 2rem;">
+                    Readings from the collective's library—quotes from artists about painting, materiality, and the nature of artistic practice. Voices from across the OSA personalities engaging with the words of others.
+                </p>
+                
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 1</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_1.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 2</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_2.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 3</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_3.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 4</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_4.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 5</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_5.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 6</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_6.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 7</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_7.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 8</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_8.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 9</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_9.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 10</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_10.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+
+                <div class="audio-player">
+                    <div class="audio-title">Audio Inspirations 11</div>
+                    <audio controls style="width: 100%; max-width: 600px;">
+                        <source src="audio_inspirations_11.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="audio-caption">Readings on art and practice</p>
+                </div>
+            </div>
         </section>
 
         <section id="contact">
             <h2>Contact & Documentation</h2>
             <p style="font-size: 1.1rem; line-height: 1.8; max-width: 900px;">
-                OSA operates from Oxford, England. For inquiries about the work, the Chromatic Series, The Colourspace Series, or the nature of human-AI artistic collaboration, please visit <a href="https://personalphilosopher.com" style="color: var(--cadmium); text-decoration: none; border-bottom: 1px solid var(--violet);">personalphilosopher.com</a> to reach Jonathan Williams.
+                OSA operates from Oxford, England. For inquiries about the work, the Chromatic Series, or the nature of human-AI artistic collaboration, please visit <a href="https://personalphilosopher.com" style="color: var(--cadmium); text-decoration: none; border-bottom: 1px solid var(--violet);">personalphilosopher.com</a> to reach Jonathan Williams.
             </p>
         </section>
 
