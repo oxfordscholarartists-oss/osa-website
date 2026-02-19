@@ -346,6 +346,119 @@
             }
         }
 
+        /* Custom Audio Player */
+        .audio-player {
+            margin: 2rem 0;
+            padding: 1.5rem 2rem;
+            background: rgba(139, 69, 19, 0.12);
+            border: 1px solid var(--oxide);
+            border-left: 4px solid var(--cadmium);
+            max-width: 640px;
+        }
+
+        .audio-title {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.85rem;
+            color: var(--ochre);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .custom-audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .audio-play-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--cadmium);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: background 0.2s ease, transform 0.1s ease;
+        }
+
+        .audio-play-btn:hover {
+            background: var(--oxide);
+            transform: scale(1.05);
+        }
+
+        .audio-play-btn svg {
+            fill: var(--chalk);
+            width: 14px;
+            height: 14px;
+            margin-left: 2px;
+        }
+
+        .audio-play-btn.playing svg {
+            margin-left: 0;
+        }
+
+        .audio-progress-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .audio-progress {
+            width: 100%;
+            height: 3px;
+            background: rgba(232, 227, 216, 0.15);
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .audio-progress::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--cadmium);
+            cursor: pointer;
+            margin-top: -4.5px;
+        }
+
+        .audio-progress::-webkit-slider-runnable-track {
+            height: 3px;
+            background: rgba(232, 227, 216, 0.15);
+            border-radius: 2px;
+        }
+
+        .audio-progress::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--cadmium);
+            border: none;
+            cursor: pointer;
+        }
+
+        .audio-time {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.75rem;
+            color: var(--ochre);
+            opacity: 0.7;
+        }
+
+        .audio-caption {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.8rem;
+            color: var(--oxide);
+            font-style: italic;
+            margin-top: 1rem;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .container {
@@ -558,102 +671,158 @@
                     Readings from the collective's library—quotes from artists about painting, materiality, and the nature of artistic practice. Voices from across the OSA personalities engaging with the words of others.
                 </p>
                 
-                <div class="audio-player">
+                <!-- Audio players 1–11 -->
+                <div class="audio-player" data-src="audio_inspirations_1.mp3">
                     <div class="audio-title">Audio Inspirations 1</div>
-                    <audio controls style="width: 100%; max-width: 600px;">
-                        <source src="audio_inspirations_1.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <div class="custom-audio-controls">
+                        <button class="audio-play-btn" aria-label="Play">
+                            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                        </button>
+                        <div class="audio-progress-wrap">
+                            <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                            <span class="audio-time">0:00 / 0:00</span>
+                        </div>
+                    </div>
                     <p class="audio-caption">Readings on art and practice</p>
                 </div>
 
-                <div class="audio-player">
+                <div class="audio-player" data-src="audio_inspirations_2.mp3">
                     <div class="audio-title">Audio Inspirations 2</div>
-                    <audio controls style="width: 100%; max-width: 600px;">
-                        <source src="audio_inspirations_2.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <div class="custom-audio-controls">
+                        <button class="audio-play-btn" aria-label="Play">
+                            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                        </button>
+                        <div class="audio-progress-wrap">
+                            <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                            <span class="audio-time">0:00 / 0:00</span>
+                        </div>
+                    </div>
                     <p class="audio-caption">Readings on art and practice</p>
                 </div>
 
-                <div class="audio-player">
+                <div class="audio-player" data-src="audio_inspirations_3.mp3">
                     <div class="audio-title">Audio Inspirations 3</div>
-                    <audio controls style="width: 100%; max-width: 600px;">
-                        <source src="audio_inspirations_3.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <div class="custom-audio-controls">
+                        <button class="audio-play-btn" aria-label="Play">
+                            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                        </button>
+                        <div class="audio-progress-wrap">
+                            <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                            <span class="audio-time">0:00 / 0:00</span>
+                        </div>
+                    </div>
                     <p class="audio-caption">Readings on art and practice</p>
                 </div>
 
-                <div class="audio-player">
+                <div class="audio-player" data-src="audio_inspirations_4.mp3">
                     <div class="audio-title">Audio Inspirations 4</div>
-                    <audio controls style="width: 100%; max-width: 600px;">
-                        <source src="audio_inspirations_4.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <div class="custom-audio-controls">
+                        <button class="audio-play-btn" aria-label="Play">
+                            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                        </button>
+                        <div class="audio-progress-wrap">
+                            <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                            <span class="audio-time">0:00 / 0:00</span>
+                        </div>
+                    </div>
                     <p class="audio-caption">Readings on art and practice</p>
                 </div>
 
-                <div class="audio-player">
+                <div class="audio-player" data-src="audio_inspirations_5.mp3">
                     <div class="audio-title">Audio Inspirations 5</div>
-                    <audio controls style="width: 100%; max-width: 600px;">
-                        <source src="audio_inspirations_5.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <div class="custom-audio-controls">
+                        <button class="audio-play-btn" aria-label="Play">
+                            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                        </button>
+                        <div class="audio-progress-wrap">
+                            <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                            <span class="audio-time">0:00 / 0:00</span>
+                        </div>
+                    </div>
                     <p class="audio-caption">Readings on art and practice</p>
                 </div>
 
-                <div class="audio-player">
+                <div class="audio-player" data-src="audio_inspirations_6.mp3">
                     <div class="audio-title">Audio Inspirations 6</div>
-                    <audio controls style="width: 100%; max-width: 600px;">
-                        <source src="audio_inspirations_6.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <div class="custom-audio-controls">
+                        <button class="audio-play-btn" aria-label="Play">
+                            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                        </button>
+                        <div class="audio-progress-wrap">
+                            <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                            <span class="audio-time">0:00 / 0:00</span>
+                        </div>
+                    </div>
                     <p class="audio-caption">Readings on art and practice</p>
                 </div>
 
-                <div class="audio-player">
+                <div class="audio-player" data-src="audio_inspirations_7.mp3">
                     <div class="audio-title">Audio Inspirations 7</div>
-                    <audio controls style="width: 100%; max-width: 600px;">
-                        <source src="audio_inspirations_7.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <div class="custom-audio-controls">
+                        <button class="audio-play-btn" aria-label="Play">
+                            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                        </button>
+                        <div class="audio-progress-wrap">
+                            <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                            <span class="audio-time">0:00 / 0:00</span>
+                        </div>
+                    </div>
                     <p class="audio-caption">Readings on art and practice</p>
                 </div>
 
-                <div class="audio-player">
+                <div class="audio-player" data-src="audio_inspirations_8.mp3">
                     <div class="audio-title">Audio Inspirations 8</div>
-                    <audio controls style="width: 100%; max-width: 600px;">
-                        <source src="audio_inspirations_8.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <div class="custom-audio-controls">
+                        <button class="audio-play-btn" aria-label="Play">
+                            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                        </button>
+                        <div class="audio-progress-wrap">
+                            <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                            <span class="audio-time">0:00 / 0:00</span>
+                        </div>
+                    </div>
                     <p class="audio-caption">Readings on art and practice</p>
                 </div>
 
-                <div class="audio-player">
+                <div class="audio-player" data-src="audio_inspirations_9.mp3">
                     <div class="audio-title">Audio Inspirations 9</div>
-                    <audio controls style="width: 100%; max-width: 600px;">
-                        <source src="audio_inspirations_9.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <div class="custom-audio-controls">
+                        <button class="audio-play-btn" aria-label="Play">
+                            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                        </button>
+                        <div class="audio-progress-wrap">
+                            <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                            <span class="audio-time">0:00 / 0:00</span>
+                        </div>
+                    </div>
                     <p class="audio-caption">Readings on art and practice</p>
                 </div>
 
-                <div class="audio-player">
+                <div class="audio-player" data-src="audio_inspirations_10.mp3">
                     <div class="audio-title">Audio Inspirations 10</div>
-                    <audio controls style="width: 100%; max-width: 600px;">
-                        <source src="audio_inspirations_10.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <div class="custom-audio-controls">
+                        <button class="audio-play-btn" aria-label="Play">
+                            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                        </button>
+                        <div class="audio-progress-wrap">
+                            <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                            <span class="audio-time">0:00 / 0:00</span>
+                        </div>
+                    </div>
                     <p class="audio-caption">Readings on art and practice</p>
                 </div>
 
-                <div class="audio-player">
+                <div class="audio-player" data-src="audio_inspirations_11.mp3">
                     <div class="audio-title">Audio Inspirations 11</div>
-                    <audio controls style="width: 100%; max-width: 600px;">
-                        <source src="audio_inspirations_11.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                    <div class="custom-audio-controls">
+                        <button class="audio-play-btn" aria-label="Play">
+                            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                        </button>
+                        <div class="audio-progress-wrap">
+                            <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                            <span class="audio-time">0:00 / 0:00</span>
+                        </div>
+                    </div>
                     <p class="audio-caption">Readings on art and practice</p>
                 </div>
             </div>
@@ -677,6 +846,64 @@
     </div>
 
     <script>
+        // Custom audio players
+        document.querySelectorAll('.audio-player[data-src]').forEach(player => {
+            const audio = new Audio(player.dataset.src);
+            const btn = player.querySelector('.audio-play-btn');
+            const progress = player.querySelector('.audio-progress');
+            const timeDisplay = player.querySelector('.audio-time');
+
+            const pauseIcon = `<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>`;
+            const playIcon = `<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="margin-left:2px"><polygon points="5,3 19,12 5,21"/></svg>`;
+
+            const fmt = s => `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+
+            audio.addEventListener('loadedmetadata', () => {
+                progress.max = audio.duration;
+                timeDisplay.textContent = `0:00 / ${fmt(audio.duration)}`;
+            });
+
+            audio.addEventListener('timeupdate', () => {
+                progress.value = audio.currentTime;
+                timeDisplay.textContent = `${fmt(audio.currentTime)} / ${fmt(audio.duration)}`;
+            });
+
+            audio.addEventListener('ended', () => {
+                btn.innerHTML = playIcon;
+                btn.classList.remove('playing');
+                progress.value = 0;
+            });
+
+            btn.addEventListener('click', () => {
+                if (audio.paused) {
+                    // Pause all other players
+                    document.querySelectorAll('.audio-player[data-src]').forEach(p => {
+                        if (p !== player) {
+                            const a = p._audio;
+                            if (a && !a.paused) {
+                                a.pause();
+                                p.querySelector('.audio-play-btn').innerHTML = playIcon;
+                                p.querySelector('.audio-play-btn').classList.remove('playing');
+                            }
+                        }
+                    });
+                    audio.play();
+                    btn.innerHTML = pauseIcon;
+                    btn.classList.add('playing');
+                } else {
+                    audio.pause();
+                    btn.innerHTML = playIcon;
+                    btn.classList.remove('playing');
+                }
+            });
+
+            progress.addEventListener('input', () => {
+                audio.currentTime = progress.value;
+            });
+
+            player._audio = audio;
+        });
+
         // Smooth scroll for any navigation that might be added
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
