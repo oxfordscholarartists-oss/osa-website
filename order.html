@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Booklets — Oxford Scholar Artists</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,700;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --chalk: #e8e3d8;
+            --slate: #1a1a1a;
+            --oxide: #8b4513;
+            --cadmium: #e63946;
+            --violet: #5a189a;
+            --ochre: #d4a574;
+            --verdigris: #2f4f4f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: var(--slate);
+            color: var(--chalk);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: overlay;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        header {
+            padding: 5rem 0 3rem;
+            border-bottom: 3px solid var(--oxide);
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 30%;
+            height: 3px;
+            background: var(--cadmium);
+        }
+
+        .back-link {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--ochre);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .back-link:hover {
+            color: var(--chalk);
+            border-bottom-color: var(--cadmium);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 0.95;
+            margin-bottom: 0.75rem;
+            color: var(--chalk);
+        }
+
+        .tagline {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.85rem;
+            color: var(--ochre);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .intro {
+            padding: 3rem 0 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(232, 227, 216, 0.85);
+            border-bottom: 1px solid rgba(232, 227, 216, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .intro p + p {
+            margin-top: 1rem;
+        }
+
+        /* Booklet selection */
+        .booklets-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-label {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--ochre);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(139, 69, 19, 0.4);
+        }
+
+        .booklet-row {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid rgba(232, 227, 216, 0.08);
+        }
+
+        .booklet-row:last-child {
+            border-bottom: none;
+        }
+
+        .booklet-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .booklet-vol {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.72rem;
+            color: var(--oxide);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .booklet-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--chalk);
+        }
+
+        .booklet-pages {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.72rem;
+            color: rgba(232, 227, 216, 0.4);
+        }
+
+        .format-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .format-option label {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--ochre);
+            cursor: pointer;
+        }
+
+        .format-option input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 1px solid rgba(139, 69, 19, 0.6);
+            background: transparent;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .format-option input[type="checkbox"]:checked {
+            background: var(--cadmium);
+            border-color: var(--cadmium);
+        }
+
+        .format-option input[type="checkbox"]:checked::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 6px;
+            width: 5px;
+            height: 9px;
+            border: 2px solid var(--slate);
+            border-top: none;
+            border-left: none;
+            transform: rotate(45deg);
+        }
+
+        .format-option input[type="checkbox"]:hover {
+            border-color: var(--cadmium);
+        }
+
+        .price-tag {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.72rem;
+            color: rgba(232, 227, 216, 0.5);
+        }
+
+        /* Format toggle */
+        .format-toggle {
+            display: flex;
+            gap: 0;
+            margin-bottom: 2rem;
+        }
+
+        .toggle-btn {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.6rem 1.5rem;
+            border: 1px solid rgba(139, 69, 19, 0.5);
+            background: transparent;
+            color: rgba(232, 227, 216, 0.5);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .toggle-btn:first-child {
+            border-right: none;
+        }
+
+        .toggle-btn.active {
+            background: var(--oxide);
+            color: var(--chalk);
+            border-color: var(--oxide);
+        }
+
+        .toggle-btn:hover:not(.active) {
+            border-color: var(--cadmium);
+            color: var(--chalk);
+        }
+
+        /* Personal details */
+        .details-section {
+            margin-bottom: 3rem;
+        }
+
+        .field {
+            margin-bottom: 1.5rem;
+        }
+
+        .field label {
+            display: block;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--ochre);
+            margin-bottom: 0.5rem;
+        }
+
+        .field input,
+        .field textarea,
+        .field select {
+            width: 100%;
+            background: rgba(232, 227, 216, 0.05);
+            border: 1px solid rgba(139, 69, 19, 0.4);
+            border-bottom: 1px solid rgba(139, 69, 19, 0.8);
+            color: var(--chalk);
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.1rem;
+            padding: 0.75rem 1rem;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+            -webkit-appearance: none;
+        }
+
+        .field input:focus,
+        .field textarea:focus {
+            border-color: var(--cadmium);
+            background: rgba(232, 227, 216, 0.08);
+        }
+
+        .field textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Address section — only shown for physical */
+        .address-section {
+            display: none;
+        }
+
+        .address-section.visible {
+            display: block;
+        }
+
+        /* Payment info */
+        .payment-note {
+            background: rgba(139, 69, 19, 0.1);
+            border-left: 4px solid var(--oxide);
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(232, 227, 216, 0.8);
+        }
+
+        .payment-note strong {
+            color: var(--ochre);
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Order summary */
+        .order-summary {
+            background: rgba(90, 24, 154, 0.08);
+            border: 1px solid rgba(90, 24, 154, 0.3);
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            min-height: 60px;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.85rem;
+            color: var(--ochre);
+            padding: 0.3rem 0;
+        }
+
+        .summary-total {
+            border-top: 1px solid rgba(90, 24, 154, 0.4);
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            font-weight: 700;
+            color: var(--chalk);
+        }
+
+        .summary-empty {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.85rem;
+            color: rgba(232, 227, 216, 0.3);
+            font-style: italic;
+        }
+
+        /* Submit */
+        .submit-btn {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            padding: 1rem 3rem;
+            background: var(--cadmium);
+            color: var(--slate);
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            display: block;
+            width: 100%;
+            margin-bottom: 4rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--oxide);
+            color: var(--chalk);
+        }
+
+        .submit-btn:active {
+            transform: scale(0.99);
+        }
+
+        .submit-btn:disabled {
+            background: rgba(232, 227, 216, 0.1);
+            color: rgba(232, 227, 216, 0.3);
+            cursor: default;
+        }
+
+        /* Success state */
+        .success-message {
+            display: none;
+            background: rgba(47, 79, 79, 0.3);
+            border: 2px solid var(--verdigris);
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .success-message h2 {
+            font-size: 2rem;
+            color: var(--ochre);
+            margin-bottom: 1rem;
+        }
+
+        .success-message p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(232, 227, 216, 0.8);
+        }
+
+        footer {
+            padding: 3rem 0;
+            border-top: 3px solid var(--oxide);
+            text-align: center;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.85rem;
+            color: var(--ochre);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .booklet-row {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .format-options {
+                display: flex;
+                gap: 2rem;
+            }
+
+            .field-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-link">← Oxford Scholar Artists</a>
+            <h1>Order Booklets</h1>
+            <div class="tagline">OSA Studio Notes Series</div>
+        </header>
+
+        <div class="intro">
+            <p>Seven hand-assembled booklets, each gathering sixteen quotes on a single theme. Saddle-stitched, A5, 20–24 pages. Made at cost.</p>
+            <p>PDFs are £2 each — you'll receive a download link by email. Physical copies are £5 each including UK postage, hand-assembled in Oxford. International postage is £8 per order. Payment by bank transfer or PayPal, details sent on receipt of order.</p>
+        </div>
+
+        <form id="order-form" action="https://formspree.io/f/xjgepnne" method="POST">
+
+            <!-- Format selector -->
+            <div class="booklets-section">
+                <div class="section-label">Select format</div>
+                <div class="format-toggle">
+                    <button type="button" class="toggle-btn active" id="btn-pdf" onclick="setFormat('pdf')">PDF — £2 each</button>
+                    <button type="button" class="toggle-btn" id="btn-physical" onclick="setFormat('physical')">Physical — £5 each</button>
+                </div>
+
+                <!-- Booklet list -->
+                <div class="section-label">Select booklets</div>
+
+                <div class="booklet-row">
+                    <div class="booklet-info">
+                        <span class="booklet-vol">Volume I</span>
+                        <span class="booklet-name">The Painter's Ground</span>
+                        <span class="booklet-pages">20 pages</span>
+                    </div>
+                    <div class="format-option">
+                        <input type="checkbox" id="b1" name="booklets" value="The Painter's Ground" onchange="updateSummary()">
+                        <label for="b1" id="label-b1">£2</label>
+                    </div>
+                </div>
+
+                <div class="booklet-row">
+                    <div class="booklet-info">
+                        <span class="booklet-vol">Volume II</span>
+                        <span class="booklet-name">Angels & Ghosts</span>
+                        <span class="booklet-pages">20 pages</span>
+                    </div>
+                    <div class="format-option">
+                        <input type="checkbox" id="b2" name="booklets" value="Angels & Ghosts" onchange="updateSummary()">
+                        <label for="b2" id="label-b2">£2</label>
+                    </div>
+                </div>
+
+                <div class="booklet-row">
+                    <div class="booklet-info">
+                        <span class="booklet-vol">Volume III</span>
+                        <span class="booklet-name">What Colour Is</span>
+                        <span class="booklet-pages">20 pages</span>
+                    </div>
+                    <div class="format-option">
+                        <input type="checkbox" id="b3" name="booklets" value="What Colour Is" onchange="updateSummary()">
+                        <label for="b3" id="label-b3">£2</label>
+                    </div>
+                </div>
+
+                <div class="booklet-row">
+                    <div class="booklet-info">
+                        <span class="booklet-vol">Volume IV</span>
+                        <span class="booklet-name">Process & Accident</span>
+                        <span class="booklet-pages">24 pages</span>
+                    </div>
+                    <div class="format-option">
+                        <input type="checkbox" id="b4" name="booklets" value="Process & Accident" onchange="updateSummary()">
+                        <label for="b4" id="label-b4">£2</label>
+                    </div>
+                </div>
+
+                <div class="booklet-row">
+                    <div class="booklet-info">
+                        <span class="booklet-vol">Volume V</span>
+                        <span class="booklet-name">Presence & Absence</span>
+                        <span class="booklet-pages">24 pages</span>
+                    </div>
+                    <div class="format-option">
+                        <input type="checkbox" id="b5" name="booklets" value="Presence & Absence" onchange="updateSummary()">
+                        <label for="b5" id="label-b5">£2</label>
+                    </div>
+                </div>
+
+                <div class="booklet-row">
+                    <div class="booklet-info">
+                        <span class="booklet-vol">Volume VI</span>
+                        <span class="booklet-name">Eastern Traditions</span>
+                        <span class="booklet-pages">20 pages</span>
+                    </div>
+                    <div class="format-option">
+                        <input type="checkbox" id="b6" name="booklets" value="Eastern Traditions" onchange="updateSummary()">
+                        <label for="b6" id="label-b6">£2</label>
+                    </div>
+                </div>
+
+                <div class="booklet-row">
+                    <div class="booklet-info">
+                        <span class="booklet-vol">Volume VII</span>
+                        <span class="booklet-name">Time & Uncertainty</span>
+                        <span class="booklet-pages">20 pages</span>
+                    </div>
+                    <div class="format-option">
+                        <input type="checkbox" id="b7" name="booklets" value="Time & Uncertainty" onchange="updateSummary()">
+                        <label for="b7" id="label-b7">£2</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order summary -->
+            <div class="section-label">Order summary</div>
+            <div class="order-summary" id="order-summary">
+                <p class="summary-empty">No booklets selected</p>
+            </div>
+
+            <!-- Contact details -->
+            <div class="details-section">
+                <div class="section-label">Your details</div>
+
+                <div class="field field-row">
+                    <div>
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Your name">
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="your@email.com">
+                    </div>
+                </div>
+
+                <!-- Address — physical only -->
+                <div class="address-section" id="address-section">
+                    <div class="field">
+                        <label for="address">Postal address</label>
+                        <textarea id="address" name="address" placeholder="Street, town, postcode, country"></textarea>
+                    </div>
+                    <div class="field">
+                        <label for="country">Country</label>
+                        <input type="text" id="country" name="country" placeholder="Country">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="notes">Notes (optional)</label>
+                    <input type="text" id="notes" name="notes" placeholder="Anything else you'd like to say">
+                </div>
+
+                <!-- Hidden fields -->
+                <input type="hidden" id="format-field" name="format" value="PDF">
+                <input type="hidden" id="total-field" name="total" value="">
+            </div>
+
+            <!-- Payment note -->
+            <div class="payment-note" id="payment-note">
+                <strong>Payment</strong>
+                On receipt of your order, you'll receive an email with payment details — bank transfer or PayPal. PDFs will be sent once payment is confirmed.
+            </div>
+
+            <button type="submit" class="submit-btn" id="submit-btn" disabled>Place order</button>
+
+            <div class="success-message" id="success-message">
+                <h2>Order received</h2>
+                <p>Thank you. You'll hear from us shortly with payment details.<br>
+                If you ordered PDFs, they'll be sent once payment is confirmed.</p>
+            </div>
+
+        </form>
+
+        <footer>
+            <p><strong>Oxford Scholar Artists</strong> — oxfordscholarartists.com</p>
+        </footer>
+    </div>
+
+    <script>
+        let currentFormat = 'pdf';
+        const PDF_PRICE = 2;
+        const PHYSICAL_PRICE = 5;
+
+        function setFormat(format) {
+            currentFormat = format;
+
+            document.getElementById('btn-pdf').classList.toggle('active', format === 'pdf');
+            document.getElementById('btn-physical').classList.toggle('active', format === 'physical');
+            document.getElementById('format-field').value = format === 'pdf' ? 'PDF' : 'Physical';
+
+            const addressSection = document.getElementById('address-section');
+            addressSection.classList.toggle('visible', format === 'physical');
+
+            const addressField = document.getElementById('address');
+            const countryField = document.getElementById('country');
+            addressField.required = format === 'physical';
+            countryField.required = format === 'physical';
+
+            const price = format === 'pdf' ? PDF_PRICE : PHYSICAL_PRICE;
+            const note = format === 'pdf' ? '£2' : '£5';
+            for (let i = 1; i <= 7; i++) {
+                document.getElementById(`label-b${i}`).textContent = note;
+            }
+
+            const paymentNote = document.getElementById('payment-note');
+            if (format === 'physical') {
+                paymentNote.innerHTML = '<strong>Payment & postage</strong>On receipt of your order, you\'ll receive an email with payment details — bank transfer or PayPal. Physical copies are £5 each including UK postage, hand-assembled in Oxford. International postage is £8 per order regardless of quantity.';
+            } else {
+                paymentNote.innerHTML = '<strong>Payment</strong>On receipt of your order, you\'ll receive an email with payment details — bank transfer or PayPal. PDFs will be sent once payment is confirmed.';
+            }
+
+            updateSummary();
+        }
+
+        function updateSummary() {
+            const checked = Array.from(document.querySelectorAll('input[name="booklets"]:checked'));
+            const summary = document.getElementById('order-summary');
+            const submitBtn = document.getElementById('submit-btn');
+            const price = currentFormat === 'pdf' ? PDF_PRICE : PHYSICAL_PRICE;
+
+            if (checked.length === 0) {
+                summary.innerHTML = '<p class="summary-empty">No booklets selected</p>';
+                submitBtn.disabled = true;
+                document.getElementById('total-field').value = '';
+                return;
+            }
+
+            let html = '';
+            checked.forEach(cb => {
+                html += `<div class="summary-line"><span>${cb.value}</span><span>£${price}</span></div>`;
+            });
+
+            const total = checked.length * price;
+            const formatLabel = currentFormat === 'pdf' ? 'PDF' : 'Physical';
+            html += `<div class="summary-line summary-total"><span>${checked.length} × ${formatLabel}</span><span>£${total}</span></div>`;
+            summary.innerHTML = html;
+
+            document.getElementById('total-field').value = `£${total} (${checked.length} × ${formatLabel} @ £${price})`;
+            submitBtn.disabled = false;
+        }
+
+        // Handle form submission via Formspree
+        const form = document.getElementById('order-form');
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            const data = new FormData(form);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    form.style.display = 'none';
+                    document.getElementById('success-message').style.display = 'block';
+                } else {
+                    submitBtn.textContent = 'Something went wrong — please try again';
+                    submitBtn.disabled = false;
+                }
+            } catch (err) {
+                submitBtn.textContent = 'Something went wrong — please try again';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
