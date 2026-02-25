@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smudger — Oxford Scholar Artists</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,700;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --chalk: #e8e3d8;
+            --slate: #1a1a1a;
+            --oxide: #8b4513;
+            --cadmium: #e63946;
+            --violet: #5a189a;
+            --ochre: #d4a574;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: var(--slate);
+            color: var(--chalk);
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: overlay;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        header {
+            padding: 5rem 0 3rem;
+            border-bottom: 3px solid var(--oxide);
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -3px; left: 0;
+            width: 30%; height: 3px;
+            background: var(--cadmium);
+        }
+
+        .back-link {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--ochre);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .back-link:hover {
+            color: var(--chalk);
+            border-bottom-color: var(--cadmium);
+        }
+
+        .role {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--ochre);
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 0.95;
+            color: var(--chalk);
+        }
+
+        .work-section {
+            padding: 4rem 0;
+        }
+
+        .work-image {
+            display: block;
+            width: 100%;
+            max-width: 480px;
+            height: auto;
+            opacity: 0.9;
+            transition: opacity 0.4s ease;
+        }
+
+        .work-image:hover {
+            opacity: 1;
+        }
+
+        .image-note {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.75rem;
+            color: var(--oxide);
+            margin-top: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .bio {
+            padding: 3rem 0;
+            border-top: 1px solid rgba(232, 227, 216, 0.15);
+            max-width: 680px;
+        }
+
+        .bio p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .bio p:last-child {
+            margin-bottom: 0;
+        }
+
+        footer {
+            padding: 3rem 0;
+            border-top: 3px solid var(--oxide);
+            margin-top: 4rem;
+            text-align: center;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.85rem;
+            color: var(--ochre);
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 0 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-link">← Oxford Scholar Artists</a>
+            <div class="role">Colour Archivist — OSA</div>
+            <h1>Smudger</h1>
+        </header>
+
+        <section class="work-section">
+            <img src="smudger_detail.jpg" alt="Colour swatch study — Smudger" class="work-image">
+            <p class="image-note">Colour swatch study, finger-applied, annotated. Greens and teals.</p>
+        </section>
+
+        <div class="bio">
+            <p>The colour archivist. Produces systematic finger-applied swatches — hundreds of them, annotated in handwriting that is itself part of the work. Where others theorise about colour, Smudger catalogues it: every green, every blue, every gradation between cerulean and cobalt, named and set down.</p>
+            <p>A practice that is simultaneously scientific and sensory. The annotations are abbreviated, personal, a working shorthand developed over years — Prussian g., oxide of chrome, W&N cob. g. — not for an audience but for the next session, the next decision, the next painting.</p>
+        </div>
+
+        <footer>
+            <p><strong>Oxford Scholar Artists</strong> — <a href="index.html" style="color: var(--ochre); text-decoration: none;">oxfordscholarartists.com</a></p>
+        </footer>
+    </div>
+</body>
+</html>
