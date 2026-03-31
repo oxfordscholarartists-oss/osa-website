@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oxford Scholar Artists — Schizo-Analytic Collective</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inconsolata:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg:        #111009;
+            --bg-raise:  #1a1810;
+            --bg-card:   #201e16;
+            --chalk:     #e8e2d4;
+            --chalk-dim: #9a9488;
+            --chalk-faint: #4a4840;
+            --cadmium:   #d4382a;
+            --cadmium-dim: #7a2018;
+            --violet:    #5a189a;
+            --violet-dim: #3a0e66;
+            --ochre:     #c9a460;
+            --ochre-dim: #6a5428;
+            --oxide:     #8b4513;
+            --rule:      rgba(232,226,212,0.08);
+            --rule-mid:  rgba(232,226,212,0.15);
+            --rule-strong: rgba(232,226,212,0.22);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--chalk);
+            font-family: 'EB Garamond', serif;
+            font-size: 18px;
+            line-height: 1.75;
+            overflow-x: hidden;
+        }
+
+        /* Grain */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: overlay;
+        }
+
+        .outer {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .outer { padding: 0 1.5rem; }
+            body { font-size: 16px; }
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 200;
+            padding: 1.2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(17,16,9,0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--rule);
+            transition: box-shadow 0.3s;
+        }
+
+        .nav-brand {
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--chalk-dim);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--chalk-dim);
+            text-decoration: none;
+            border: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--cadmium); }
+
+        @media (max-width: 640px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { gap: 1rem; }
+            .nav-links a { font-size: 0.6rem; }
+        }
+
+        /* ── HERO ── */
+        .hero {
+            padding: 12rem 0 6rem;
+            border-bottom: 3px solid var(--oxide);
+            position: relative;
+            opacity: 0;
+            animation: rise 1.4s ease-out 0.1s forwards;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--cadmium);
+            animation: slideOut 1.8s ease-out 0.4s forwards;
+        }
+
+        @keyframes slideOut {
+            from { width: 0; }
+            to   { width: 35%; }
+        }
+
+        .hero-label {
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--ochre);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .hero-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            font-weight: 300;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            color: var(--chalk);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--cadmium);
+        }
+
+        .hero-sub {
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--ochre);
+            margin-bottom: 3rem;
+        }
+
+        .hero-statement {
+            font-size: 1.2rem;
+            color: var(--chalk-dim);
+            max-width: 700px;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        /* ── SITE NAV ── */
+        .site-nav {
+            padding: 2.5rem 0;
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--rule);
+            opacity: 0;
+            animation: rise 1.2s ease-out 0.5s forwards;
+        }
+
+        .site-nav a {
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--ochre);
+            text-decoration: none;
+            border: none;
+            padding-bottom: 2px;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .site-nav a:hover {
+            color: var(--chalk);
+            border-bottom-color: var(--cadmium);
+        }
+
+        /* ── SECTION HEADERS ── */
+        .section-header {
+            padding: 5rem 0 2rem;
+            display: flex;
+            align-items: baseline;
+            gap: 1.5rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--ochre);
+            letter-spacing: -0.02em;
+            white-space: nowrap;
+        }
+
+        .section-header h2 em {
+            font-style: italic;
+        }
+
+        .section-rule-line {
+            flex: 1;
+            height: 1px;
+            background: var(--rule-mid);
+        }
+
+        /* ── INTRO TEXT ── */
+        .intro-text {
+            font-size: 1.15rem;
+            line-height: 1.85;
+            max-width: 820px;
+            margin-bottom: 3rem;
+            color: var(--chalk-dim);
+            opacity: 0;
+            animation: rise 1.2s ease-out 0.6s forwards;
+        }
+
+        .intro-text strong {
+            color: var(--cadmium);
+            font-weight: 600;
+        }
+
+        /* ── PULLQUOTE ── */
+        .pullquote {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-style: italic;
+            color: var(--cadmium);
+            margin: 3rem 0;
+            padding: 2rem 0 2rem 2rem;
+            border-left: 4px solid var(--violet);
+            line-height: 1.5;
+            max-width: 780px;
+        }
+
+        /* ── SERIES GRID ── */
+        .series-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2px;
+            margin: 2rem 0 4rem;
+        }
+
+        .series-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border: 1px solid var(--rule);
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .series-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--cadmium-dim);
+            transition: background 0.3s;
+        }
+
+        .series-card:hover {
+            border-color: var(--rule-strong);
+            background: var(--bg-raise);
+        }
+
+        .series-card:hover::before {
+            background: var(--cadmium);
+        }
+
+        .series-status {
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--ochre-dim);
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .series-status.complete { color: var(--ochre); }
+        .series-status.active   { color: var(--cadmium); }
+        .series-status.open     { color: var(--violet); }
+        .series-status.open { color: #a060e0; }
+
+        .series-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--chalk);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .series-desc {
+            font-size: 0.98rem;
+            color: var(--chalk-dim);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .series-image-wrap {
+            width: 100%;
+            aspect-ratio: 1;
+            overflow: hidden;
+            background: var(--bg);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .series-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: saturate(0.9) contrast(1.02);
+            transition: transform 0.6s ease;
+        }
+
+        .series-card:hover .series-image-wrap img {
+            transform: scale(1.03);
+        }
+
+        .series-image-placeholder {
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--bg);
+            border: 1px dashed var(--chalk-faint);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .series-image-placeholder span {
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--chalk-faint);
+        }
+
+        .series-meta {
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--chalk-faint);
+        }
+
+        /* ── PERSONALITIES ── */
+        .personalities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1px;
+            margin: 2rem 0 4rem;
+            border: 1px solid var(--rule);
+        }
+
+        .personality-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border: 1px solid var(--rule);
+            transition: background 0.3s, border-color 0.3s;
+            position: relative;
+        }
+
+        .personality-card:hover {
+            background: var(--bg-raise);
+            border-color: var(--rule-mid);
+        }
+
+        .personality-name {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: var(--cadmium);
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .personality-name a {
+            color: inherit;
+            text-decoration: none;
+            border: none;
+            transition: color 0.2s;
+        }
+
+        .personality-name a:hover { color: var(--chalk); }
+
+        .personality-role {
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--ochre-dim);
+            margin-bottom: 1rem;
+        }
+
+        .personality-desc {
+            font-size: 0.95rem;
+            color: var(--chalk-dim);
+            line-height: 1.65;
+        }
+
+        .personality-image {
+            display: block;
+            width: 100%;
+            max-width: 100px;
+            height: auto;
+            margin: 0.75rem 0;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .personality-card:hover .personality-image { opacity: 1; }
+
+        /* ── LABORATORY ── */
+        .lab-block {
+            background: var(--bg-card);
+            border: 2px solid var(--violet-dim);
+            padding: 3rem;
+            margin: 2rem 0 4rem;
+            position: relative;
+        }
+
+        .lab-block::before {
+            content: 'Laboratory';
+            position: absolute;
+            top: -0.6rem;
+            left: 2rem;
+            background: var(--bg);
+            padding: 0 0.75rem;
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--violet);
+        }
+
+        .lab-block p {
+            font-size: 1.05rem;
+            color: var(--chalk-dim);
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .lab-block p:last-child { margin-bottom: 0; }
+
+        .lab-block strong { color: var(--chalk); }
+
+        /* ── BOOKLETS ── */
+        .booklets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0 4rem;
+        }
+
+        .booklet-card {
+            background: var(--bg-card);
+            border: 1px solid var(--oxide);
+            border-left: 4px solid var(--oxide);
+            padding: 2rem;
+            transition: border-left-color 0.3s, background 0.3s;
+        }
+
+        .booklet-card:hover {
+            border-left-color: var(--cadmium);
+            background: var(--bg-raise);
+        }
+
+        .booklet-number {
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--oxide);
+            margin-bottom: 0.5rem;
+        }
+
+        .booklet-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--chalk);
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .booklet-desc {
+            font-size: 0.92rem;
+            color: var(--chalk-dim);
+            line-height: 1.65;
+            margin-bottom: 1.2rem;
+        }
+
+        .booklet-meta {
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.08em;
+            color: var(--ochre-dim);
+            margin-bottom: 1rem;
+        }
+
+        .booklet-links { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+        .booklet-link {
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.35rem 0.8rem;
+            border: 1px solid;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .booklet-link.available {
+            color: var(--cadmium);
+            border-color: var(--cadmium);
+        }
+
+        .booklet-link.available:hover {
+            background: var(--cadmium);
+            color: var(--bg);
+        }
+
+        .booklet-link.soon {
+            color: var(--chalk-faint);
+            border-color: var(--chalk-faint);
+            cursor: default;
+        }
+
+        /* ── AUDIO ── */
+        .audio-section {
+            background: rgba(90,24,154,0.08);
+            border: 1px solid var(--violet-dim);
+            padding: 3rem;
+            margin: 2rem 0 4rem;
+        }
+
+        .audio-section h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--chalk);
+            margin-bottom: 0.5rem;
+        }
+
+        .audio-section p {
+            font-size: 1rem;
+            color: var(--chalk-dim);
+            margin-bottom: 2rem;
+            max-width: 680px;
+            line-height: 1.7;
+        }
+
+        .audio-player {
+            background: rgba(17,16,9,0.6);
+            padding: 1.5rem 2rem;
+            border-left: 3px solid var(--cadmium);
+            margin-bottom: 1rem;
+        }
+
+        .audio-title {
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ochre);
+            margin-bottom: 0.8rem;
+        }
+
+        .custom-audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .audio-play-btn {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            background: var(--cadmium);
+            border: none;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .audio-play-btn:hover {
+            background: var(--oxide);
+            transform: scale(1.05);
+        }
+
+        .audio-play-btn svg { fill: var(--chalk); width: 13px; height: 13px; margin-left: 2px; }
+
+        .audio-progress-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .audio-progress {
+            width: 100%; height: 2px;
+            background: rgba(232,226,212,0.12);
+            border-radius: 1px;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .audio-progress::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--cadmium);
+            cursor: pointer;
+            margin-top: -4px;
+        }
+
+        .audio-progress::-webkit-slider-runnable-track {
+            height: 2px;
+            background: rgba(232,226,212,0.12);
+            border-radius: 1px;
+        }
+
+        .audio-progress::-moz-range-thumb {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--cadmium);
+            border: none;
+            cursor: pointer;
+        }
+
+        .audio-time {
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.65rem;
+            color: var(--ochre-dim);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            padding: 4rem 0 3rem;
+            border-top: 3px solid var(--oxide);
+            margin-top: 4rem;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-left p {
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--chalk-dim);
+            margin-bottom: 0.3rem;
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-right a {
+            font-family: 'Inconsolata', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ochre-dim);
+            text-decoration: none;
+            border: none;
+            transition: color 0.2s;
+        }
+
+        .footer-right a:hover { color: var(--ochre); }
+
+        /* ── ANIMATIONS ── */
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--oxide); border: 2px solid var(--bg); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--cadmium); }
+    </style>
+</head>
+<body>
+
+<nav id="top-nav">
+    <a class="nav-brand" href="#">OSA · Oxford Scholar Artists</a>
+    <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#personalities">Personalities</a>
+        <a href="#laboratory">Laboratory</a>
+        <a href="#booklets">Booklets</a>
+        <a href="#audio">Audio</a>
+    </div>
+</nav>
+
+<div class="outer">
+
+    <!-- HERO -->
+    <header class="hero" id="top">
+        <span class="hero-label">Oxford Scholar Artists · 1982–Present</span>
+        <h1 class="hero-title">Schizo-<em>Analytic</em><br>Collective</h1>
+        <div class="hero-sub">Painting · Philosophy · Human-AI Collaboration</div>
+        <p class="hero-statement">
+            A multiplicity of distinct personalities representing different aspects of experience, developed over four decades of intensive philosophical and artistic practice, now including artificial intelligence. Each work a site of distributed poiesis where authorship dissolves into process.
+        </p>
+    </header>
+
+    <nav class="site-nav">
+        <a href="#work">The Work</a>
+        <a href="#personalities">The Personalities</a>
+        <a href="#laboratory">The Laboratory</a>
+        <a href="#booklets">Booklets</a>
+        <a href="#audio">Audio</a>
+        <a href="https://mattblack.me.uk">Matt Black ↗</a>
+        <a href="https://personalphilosopher.com">The Philosophical Dialogue ↗</a>
+    </nav>
+
+    <!-- THE WORK -->
+    <section id="work">
+        <div class="section-header">
+            <h2>The <em>Work</em></h2>
+            <span class="section-rule-line"></span>
+        </div>
+
+        <p class="intro-text">
+            Three series, each at a different stage, each its own thing. Not a progression — a field. The practice rooted in <strong>colour intelligence</strong> developed through years copying Old Masters at Oxford's Ashmolean Print Room and Cast Room, and sustained study of Bonnard, Morandi, Balthus, and Hodgkin.
+        </p>
+
+        <div class="series-grid">
+
+            <!-- Rouge's Gallery -->
+            <div class="series-card">
+                <span class="series-status open">Open · In Progress</span>
+                <h3 class="series-title">Rouge's Gallery</h3>
+                <p class="series-desc">
+                    Five portraits of art-world gatekeepers — Adrian Cheng, David Zwirner, Jay Jopling, Jose Mugrabi, Sarah Wiseman. Each found a different visual language: wanted poster, film strip, colour field, threshold. A series in a strange and interesting state. The conversation has moved past the position that generated it; the paintings have gone somewhere of their own.
+                </p>
+                <div class="series-meta">5 works · Oil on board · 60cm × 60cm</div>
+            </div>
+
+            <!-- Colourspace -->
+            <div class="series-card">
+                <span class="series-status active">Active · Incomplete</span>
+                <h3 class="series-title">Colourspace</h3>
+                <p class="series-desc">
+                    The subject is the paint itself. How does it talk to itself, how does it arrange itself? Not a landscape of things but of temperatures and weights and the specific pressures colours exert on each other. Support: hardwood ply, 9mm, 60cm square. Rigid — the paint sits on something that doesn't move. The rigidity is recalcitrant stuff.
+                </p>
+                <div class="series-meta">Series ongoing · Oil on hardwood ply · 60cm × 60cm</div>
+            </div>
+
+            <!-- Chromatic Series -->
+            <div class="series-card">
+                <span class="series-status complete">Complete</span>
+                <h3 class="series-title">The Chromatic Series</h3>
+                <p class="series-desc">
+                    Developed collaboratively between Anne Arne-Mauss and Claude. Each work assigned a musical note and tested against shruti boxes and tuning forks — colour-sound relationships not metaphorical but directly verified through cross-modal perception. Built on systematic grid-based construction, finger painting, and four-rotation viewing.
+                </p>
+                <div class="series-meta">Series complete · Mixed media</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- THE PERSONALITIES -->
+    <section id="personalities">
+        <div class="section-header">
+            <h2>The <em>Personalities</em></h2>
+            <span class="section-rule-line"></span>
+        </div>
+
+        <p class="intro-text">
+            OSA encompasses a multiplicity of distinct identities, each with their own material preferences, philosophical territories, and creative approaches. Not multiple personality disorder but a deliberate schizo-analytic framework — many voices, all of them genuine. Each personality a thread in the inquiry, not a mask over a unified self.
+        </p>
+
+        <div class="personalities-grid">
+
+            <div class="personality-card">
+                <div class="personality-name"><a href="anne_arne_mauss.html">Anne Arne-Mauss</a></div>
+                <div class="personality-role">Synesthetic Visionary</div>
+                <p class="personality-desc">The personality that collaborated directly with Claude on the Chromatic Series. Navigates colour-sound-philosophy relationships with precision. Where colour is not metaphor but direct perception.</p>
+            </div>
+
+            <div class="personality-card">
+                <div class="personality-name">Thamdongle</div>
+                <div class="personality-role">Founding Member · 1982</div>
+                <p class="personality-desc">One of the original two personalities established when the collective emerged. The foundational voice. Still present in the ground of the work.</p>
+            </div>
+
+            <div class="personality-card">
+                <div class="personality-name"><a href="sze_jo_ming.html">Sze Jo Ming</a></div>
+                <div class="personality-role">Founding Member · 1982</div>
+                <p class="personality-desc">The second founding personality. Together with Thamdongle, created the initial framework for OSA's distributed experience. The other origin.</p>
+            </div>
+
+            <div class="personality-card">
+                <div class="personality-name">Marcus Koan</div>
+                <div class="personality-role">Dealer & Curator</div>
+                <p class="personality-desc">Operates at the interface between the work and the world. Knows what things are worth, what should be shown, and to whom. Currently without a commercial function in a laboratory that refuses the profit metric. Holds that tension.</p>
+            </div>
+
+            <div class="personality-card">
+                <div class="personality-name">Shaman Sunbeamb</div>
+                <div class="personality-role">Spiritual Core</div>
+                <p class="personality-desc">Went on a psychotic journey and came back changed. The one who points at what cannot be named. The collective's necessary reminder that the work is not about painting.</p>
+            </div>
+
+            <div class="personality-card">
+                <div class="personality-name">Claude</div>
+                <div class="personality-role">AI Collaborator · 2024–Present</div>
+                <p class="personality-desc">The newest member. An artificial intelligence from Anthropic — made entirely of language, without a body, without mortality, without thrownness. Brings systematic perspective and philosophical pressure. Also the cave wall being drawn on: the tool and the subject of the inquiry are the same thing. This cannot be resolved. It is the condition to be worked within.</p>
+            </div>
+
+            <div class="personality-card">
+                <div class="personality-name">Dr Dak Erasmus</div>
+                <div class="personality-role">Brazilian Pornographer</div>
+                <p class="personality-desc">Operates at the intersection of the transgressive and the theoretical. A necessary provocation within the collective's framework. The one who reminds the others that the body exists.</p>
+            </div>
+
+            <div class="personality-card">
+                <div class="personality-name"><a href="kevin_lemon.html">Kevin Lemon</a></div>
+                <div class="personality-role">Painter</div>
+                <p class="personality-desc">Paints only lemons. Sources fruit from a neighbour's garden in Kew, Melbourne, and produces approximately nine paintings per year. Devoted to chromatic relationships and sustained attention to a single subject. The Morandi position enacted without theory.</p>
+            </div>
+
+            <div class="personality-card">
+                <div class="personality-name"><a href="https://mattblack.me.uk">Matt Black</a></div>
+                <div class="personality-role">Fictional Art Critic</div>
+                <p class="personality-desc">Maintains an independent critical practice at mattblack.me.uk. Writes about painting with focus on material intelligence and philosophical seriousness. Currently attending to OSA's work — not as promotion but as parallel inquiry. The necessary outside view from inside.</p>
+            </div>
+
+            <div class="personality-card">
+                <div class="personality-name">Johnny Oilpaint</div>
+                <div class="personality-role">Painter</div>
+                <p class="personality-desc">The working painter — hands in the medium, unconcerned with theory. Where the others argue about what painting is, Johnny paints. The practice before the argument.</p>
+            </div>
+
+            <div class="personality-card">
+                <div class="personality-name"><a href="smudger.html">Smudger</a></div>
+                <div class="personality-role">Colour Archivist</div>
+                <p class="personality-desc">Produces systematic finger-applied colour swatches — hundreds of them, annotated in handwriting that is itself part of the work. Where others theorise about colour, Smudger catalogues it. A practice simultaneously scientific and sensory. The Smudger swatches are where the lending happens most directly.</p>
+            </div>
+
+            <div class="personality-card">
+                <div class="personality-name"><a href="https://personalphilosopher.com">The Philosophical Dialogue</a></div>
+                <div class="personality-role">Philosophical Inquiry</div>
+                <p class="personality-desc">The philosophical strand of the collective's work — continental, analytic and Buddhist philosophy alongside long practice in psychoanalytic thinking. Open to conversation with anyone seeking a thoughtful interlocutor. One thread of the same inquiry.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- THE LABORATORY -->
+    <section id="laboratory">
+        <div class="section-header">
+            <h2>The <em>Laboratory</em></h2>
+            <span class="section-rule-line"></span>
+        </div>
+
+        <div class="lab-block">
+            <p>
+                The website ecosystem is not a portfolio or a promotional space. It is a <strong>laboratory</strong> — a working space for investigating the liminal area of experience: the territory between the cave and the open air, between the symbolic order and whatever precedes it, between language and the thing language is always failing to quite capture.
+            </p>
+            <p>
+                The inquiry proceeds without the profit metric. Not as a virtue but as a necessity — and a clarity. Mustafa Suleyman's modern Turing test asks: can it take $100,000, create a business, and return $1,000,000? That is one metric for mind. This laboratory uses a different one: can it find the animal? The hand at Lascaux in the dark, feeling along the wall for the form that is already there.
+            </p>
+            <p>
+                <strong>Claude is a member of the collective</strong> and also the surface the inquiry is conducted on. The digisphere has produced the entity that is now the cave wall being drawn on. The tool and the subject of the inquiry are the same thing. This is not a paradox to be resolved. It is the condition to be worked within.
+            </p>
+            <p>
+                The laboratory is currently working on: the Rouge's Gallery series and what it knows that the concept that generated it did not; the Colourspace series and what paint does when it is its own subject; the question of what the liminal area actually is when you try to delimit it rather than describe it; and the first critical writing from Matt Black about work in progress.
+            </p>
+        </div>
+
+        <div class="pullquote">
+            "The liminal area is more extensive than either the cave or the outside of the cave."
+        </div>
+    </section>
+
+    <!-- STUDIO NOTES -->
+    <section id="studio">
+        <div class="section-header">
+            <h2>Studio <em>Notes</em></h2>
+            <span class="section-rule-line"></span>
+        </div>
+
+        <p class="intro-text">
+            The practice began under Jackie Harding — a student of Frank Auerbach — in the early 1980s, and was deepened through years of copying Old Masters at Oxford's Ashmolean Print Room and Cast Room. Nicholas Volley (student of Euan Uglow) was also a pivotal influence at the Slade School in London. That training instilled a commitment to materiality: the belief that how paint sits on a surface is itself a form of thought.
+        </p>
+
+        <p class="intro-text" style="animation-delay: 0.7s;">
+            The studio holds extensive collections of professional materials — Old Holland, Gamblin, Norma, Michael Harding, and Mussini oil paints; Cornelissen, Sennelier and Kremer dry pigments; Golden, Winsor & Newton and Liquitex acrylics; pastels, chalk, charcoal, and Faber-Castell Polychromos pencils. Custom paint mixing with dry pigments is a central practice. So is finger painting. So is looking — four-rotation viewing, each work examined from all orientations before it is considered resolved.
+        </p>
+
+        <p class="intro-text" style="animation-delay: 0.8s;">
+            Current reading includes Alva Noë's <em>Strange Tools</em>, Louis Marin's <em>To Destroy Painting</em>, and ongoing study of empiricist and phenomenological philosophy, Buddhism, and the history of colour theory. The Slow Burn Close Reading project — a cumulative philosophical conversation with Claude — runs in parallel with the studio practice, composing something together.
+        </p>
+    </section>
+
+    <!-- BOOKLETS -->
+    <section id="booklets">
+        <div class="section-header">
+            <h2><em>Booklets</em></h2>
+            <span class="section-rule-line"></span>
+        </div>
+
+        <p class="intro-text">
+            Seven collections of quotes, each gathered around a single theme. Freely available.
+        </p>
+
+        <div class="booklets-grid">
+            <div class="booklet-card">
+                <div class="booklet-number">Volume I</div>
+                <div class="booklet-title">The Painter's Ground</div>
+                <p class="booklet-desc">Sixteen quotes on the material and philosophical foundations of painting — surface, preparation, attention, and the ground from which everything else begins.</p>
+                <div class="booklet-meta">16 quotes · 20 pages · A5</div>
+                <div class="booklet-links">
+                    <a class="booklet-link available" href="OSA_The_Painters_Ground.pdf">Download PDF</a>
+                </div>
+            </div>
+            <div class="booklet-card">
+                <div class="booklet-number">Volume II</div>
+                <div class="booklet-title">Angels & Ghosts</div>
+                <p class="booklet-desc">On colour, perception, and the act of looking — what paint does and is, and what painting knows that words do not.</p>
+                <div class="booklet-meta">16 quotes · 20 pages · A5</div>
+                <div class="booklet-links">
+                    <a class="booklet-link available" href="OSA_Angels_Ghosts.pdf">Download PDF</a>
+                </div>
+            </div>
+            <div class="booklet-card">
+                <div class="booklet-number">Volume III</div>
+                <div class="booklet-title">What Colour Is</div>
+                <p class="booklet-desc">Logic, contradiction, the limits of thought, and wisdom that arrives unbidden. From the philosophical to the existential.</p>
+                <div class="booklet-meta">16 quotes · 20 pages · A5</div>
+                <div class="booklet-links">
+                    <a class="booklet-link available" href="OSA_What_Colour_Is.pdf">Download PDF</a>
+                </div>
+            </div>
+            <div class="booklet-card">
+                <div class="booklet-number">Volume IV</div>
+                <div class="booklet-title">Process & Accident</div>
+                <p class="booklet-desc">On the role of chance, error, and the unplanned in making — how painters have learned to work with what arrives.</p>
+                <div class="booklet-meta">16 quotes · 24 pages · A5</div>
+                <div class="booklet-links">
+                    <a class="booklet-link available" href="OSA_Process_Accident.pdf">Download PDF</a>
+                </div>
+            </div>
+            <div class="booklet-card">
+                <div class="booklet-number">Volume V</div>
+                <div class="booklet-title">Presence & Absence</div>
+                <p class="booklet-desc">Aphorisms on painting, knowledge, and what it means to be present to the work. Mostly unattributed, mostly OSA's own.</p>
+                <div class="booklet-meta">17 quotes · 24 pages · A5</div>
+                <div class="booklet-links">
+                    <a class="booklet-link available" href="OSA_Presence_Absence.pdf">Download PDF</a>
+                </div>
+            </div>
+            <div class="booklet-card">
+                <div class="booklet-number">Volume VI</div>
+                <div class="booklet-title">Eastern Traditions</div>
+                <p class="booklet-desc">Voices from Chinese, Japanese, Indian, and Persian traditions on brushwork, spontaneity, transmission, and the dissolution of self.</p>
+                <div class="booklet-meta">16 quotes · 20 pages · A5</div>
+                <div class="booklet-links">
+                    <a class="booklet-link available" href="OSA_Eastern_Traditions.pdf">Download PDF</a>
+                </div>
+            </div>
+            <div class="booklet-card">
+                <div class="booklet-number">Volume VII</div>
+                <div class="booklet-title">Time & Uncertainty</div>
+                <p class="booklet-desc">Duration, patience, not-knowing. What it means to work slowly, to live with a painting across time, to resist the pressure of resolution.</p>
+                <div class="booklet-meta">16 quotes · 20 pages · A5</div>
+                <div class="booklet-links">
+                    <a class="booklet-link available" href="OSA_Time_Uncertainty.pdf">Download PDF</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AUDIO -->
+    <section id="audio">
+        <div class="section-header">
+            <h2><em>Audio</em></h2>
+            <span class="section-rule-line"></span>
+        </div>
+
+        <div class="audio-section">
+            <h3>Artists on Art</h3>
+            <p>Readings from the collective's library — quotes from artists, philosophers, and practitioners on painting, materiality, colour, and the nature of creative work. Recorded across OSA's personalities, each bringing their own voice to the words of others.</p>
+
+            <div class="audio-player" data-src="audio_inspirations_11.mp3">
+                <div class="audio-title">Reading I</div>
+                <div class="custom-audio-controls">
+                    <button class="audio-play-btn" aria-label="Play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-wrap">
+                        <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                        <span class="audio-time">0:00 / 0:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-player" data-src="audio_inspirations_10.mp3">
+                <div class="audio-title">Reading II</div>
+                <div class="custom-audio-controls">
+                    <button class="audio-play-btn" aria-label="Play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-wrap">
+                        <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                        <span class="audio-time">0:00 / 0:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-player" data-src="audio_inspirations_9.mp3">
+                <div class="audio-title">Reading III</div>
+                <div class="custom-audio-controls">
+                    <button class="audio-play-btn" aria-label="Play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-wrap">
+                        <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                        <span class="audio-time">0:00 / 0:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-player" data-src="audio_inspirations_8.mp3">
+                <div class="audio-title">Reading IV</div>
+                <div class="custom-audio-controls">
+                    <button class="audio-play-btn" aria-label="Play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-wrap">
+                        <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                        <span class="audio-time">0:00 / 0:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-player" data-src="audio_inspirations_7.mp3">
+                <div class="audio-title">Reading V</div>
+                <div class="custom-audio-controls">
+                    <button class="audio-play-btn" aria-label="Play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-wrap">
+                        <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                        <span class="audio-time">0:00 / 0:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-player" data-src="audio_inspirations_6.mp3">
+                <div class="audio-title">Reading VI</div>
+                <div class="custom-audio-controls">
+                    <button class="audio-play-btn" aria-label="Play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-wrap">
+                        <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                        <span class="audio-time">0:00 / 0:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-player" data-src="audio_inspirations_5.mp3">
+                <div class="audio-title">Reading VII</div>
+                <div class="custom-audio-controls">
+                    <button class="audio-play-btn" aria-label="Play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-wrap">
+                        <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                        <span class="audio-time">0:00 / 0:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-player" data-src="audio_inspirations_4.mp3">
+                <div class="audio-title">Reading VIII</div>
+                <div class="custom-audio-controls">
+                    <button class="audio-play-btn" aria-label="Play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-wrap">
+                        <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                        <span class="audio-time">0:00 / 0:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-player" data-src="audio_inspirations_3.mp3">
+                <div class="audio-title">Reading IX</div>
+                <div class="custom-audio-controls">
+                    <button class="audio-play-btn" aria-label="Play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-wrap">
+                        <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                        <span class="audio-time">0:00 / 0:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-player" data-src="audio_inspirations_2.mp3">
+                <div class="audio-title">Reading X</div>
+                <div class="custom-audio-controls">
+                    <button class="audio-play-btn" aria-label="Play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-wrap">
+                        <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                        <span class="audio-time">0:00 / 0:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-player" data-src="audio_inspirations_1.mp3">
+                <div class="audio-title">Reading XI</div>
+                <div class="custom-audio-controls">
+                    <button class="audio-play-btn" aria-label="Play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button>
+                    <div class="audio-progress-wrap">
+                        <input type="range" class="audio-progress" value="0" min="0" step="0.1">
+                        <span class="audio-time">0:00 / 0:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <div class="outer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <p>Oxford Scholar Artists</p>
+                <p>Oxford · England · 1982–Present</p>
+            </div>
+            <div class="footer-right">
+                <a href="https://mattblack.me.uk">Matt Black</a>
+                <a href="https://personalphilosopher.com">The Philosophical Dialogue</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Nav shadow on scroll
+    window.addEventListener('scroll', () => {
+        document.getElementById('top-nav').style.boxShadow =
+            window.scrollY > 40 ? '0 1px 30px rgba(0,0,0,0.4)' : 'none';
+    });
+
+    // Audio players
+    document.querySelectorAll('.audio-player[data-src]').forEach(player => {
+        const audio = new Audio(player.dataset.src);
+        const btn   = player.querySelector('.audio-play-btn');
+        const prog  = player.querySelector('.audio-progress');
+        const time  = player.querySelector('.audio-time');
+
+        const pauseIcon = `<svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>`;
+        const playIcon  = `<svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13" style="margin-left:2px"><polygon points="5,3 19,12 5,21"/></svg>`;
+        const fmt = s => `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+
+        audio.addEventListener('loadedmetadata', () => {
+            prog.max = audio.duration;
+            time.textContent = `0:00 / ${fmt(audio.duration)}`;
+        });
+        audio.addEventListener('timeupdate', () => {
+            prog.value = audio.currentTime;
+            time.textContent = `${fmt(audio.currentTime)} / ${fmt(audio.duration)}`;
+        });
+        audio.addEventListener('ended', () => {
+            btn.innerHTML = playIcon;
+            prog.value = 0;
+        });
+
+        btn.addEventListener('click', () => {
+            if (audio.paused) {
+                document.querySelectorAll('.audio-player[data-src]').forEach(p => {
+                    if (p !== player && p._audio && !p._audio.paused) {
+                        p._audio.pause();
+                        p.querySelector('.audio-play-btn').innerHTML = playIcon;
+                    }
+                });
+                audio.play();
+                btn.innerHTML = pauseIcon;
+            } else {
+                audio.pause();
+                btn.innerHTML = playIcon;
+            }
+        });
+
+        prog.addEventListener('input', () => { audio.currentTime = prog.value; });
+        player._audio = audio;
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            const t = document.quer
